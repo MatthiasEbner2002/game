@@ -1,4 +1,5 @@
 from cmath import log
+import copy
 import math
 from random import randint
 import os
@@ -65,6 +66,7 @@ class Size:
 class Main_Menu:
     def __init__(self, size):
         self.size = size
+        self.running = True
         self.field = [[' ' for i in range(self.size.y)]
                       for j in range(self.size.x)]
         self.item = [
@@ -122,16 +124,105 @@ class Main_Menu:
                 self.menu.aktiv_option = (
                     self.menu.aktiv_option + 1) % self.menu.anzahl_options
             elif ch == 10:  # ENTER
-                self._enter(self.menu.aktiv_option)
+                self._enter(self.menu.aktiv_option, screen)
+            elif ch == 112:
+                self._enter(0, screen)
+            elif ch == 115:
+                self._enter(1, screen)
+            elif ch == 113:
+                self._enter(2, screen)
+        return
 
-    def _enter(self, option):
+    def _enter(self, option, screen):
         if option == 0:
             logging.debug("PLAY")
         elif option == 1:
             logging.debug("SETTING")
         elif option == 2:
             logging.debug("QUITING")
-            quit()
+            self._shutdown(screen)
+
+    def _shutdown(self, screen):
+        size = copy.deepcopy(self.size)
+        size.x = size.x - 1
+        size.y = size.y
+        c1 = '#'
+        x, y = 0, 0
+        while x <= size.x - x and y <= size.y - y:
+            for i in range(y, size.y - y, 1):
+                self.field[x][i] = c1
+                #self.field[size.x - x][i] = c1
+                a = 1
+            self._shutdown_render(screen)
+
+            x = x + 1
+            y = y + 3
+            #self.field[x][y] = '\\'
+            #self.field[size.x - x][y] = '/'
+            #self.field[x][size.y - y - 1] = '/'
+            #self.field[size.x - x][size.y - y - 1] = '\\'
+        x, y = 0, 0
+        while x <= size.x - x and y <= size.y - y:
+            for i in range(x+1, size.x - x, 1):
+                #self.field[i][y] = c1
+                self.field[i][size.y - y - 1] = c1
+                a = 1
+            y = y + 1
+
+            for i in range(x+1, size.x - x, 1):
+                #self.field[i][y] = c1
+                self.field[i][size.y - y - 1] = c1
+                a = 1
+            y = y + 1
+
+            for i in range(x + 1, size.x - x, 1):
+                #self.field[i][y] = c1
+                self.field[i][size.y - y - 1] = c1
+                a = 1
+            y = y + 1
+            x = x + 1
+            self._shutdown_render(screen)
+
+        x, y = 0, 0
+        while x <= size.x - x and y <= size.y - y:
+            for i in range(y, size.y - y, 1):
+                #self.field[x][i] = c1
+                self.field[size.x - x][i] = c1
+                a = 1
+            self._shutdown_render(screen)
+
+            x = x + 1
+            y = y + 3
+
+        x, y = 0, 0
+        while x <= size.x - x and y <= size.y - y:
+            for i in range(x+1, size.x - x, 1):
+                self.field[i][y] = c1
+                #self.field[i][size.y - y - 1] = c1
+                a = 1
+            y = y + 1
+
+            for i in range(x+1, size.x - x, 1):
+                self.field[i][y] = c1
+                #self.field[i][size.y - y - 1] = c1
+                a = 1
+            y = y + 1
+
+            for i in range(x + 1, size.x - x, 1):
+                self.field[i][y] = c1
+                #self.field[i][size.y - y - 1] = c1
+                a = 1
+            y = y + 1
+            x = x + 1
+            self._shutdown_render(screen)
+        time.sleep(.3)
+        quit()
+
+    def _shutdown_render(self, screen):
+        self.render(screen)
+        screen.refresh()
+        time.sleep(0.025)
+        return
 
     def render(self, screen):
         size = self.size
@@ -143,11 +234,9 @@ class Main_Menu:
             screen.addstr(i, 0, row)
 
     def run(self, screen):
-        logging.debug("run:")
-        while True:
+        while self.running:
             self._generate_field()
             self.render(screen)
-            #logging.debug("refresh site")
             screen.refresh()
             self._move(screen)
 

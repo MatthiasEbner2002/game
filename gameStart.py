@@ -12,17 +12,11 @@ def main(screen):
                     level=logging.DEBUG)
 
     num_rows, num_cols = screen.getmaxyx()
-    # Configure screen
-    #screen.timeout(0)
     field = Field.from_terminal_size(screen)
     field.item = Main_Menu(field.size)
-    #logging.info(str(num_cols) +  "  g ")
-    #logging.info( "  g ")
+
     while (True):
         field.run(screen)
-        #field.render(screen)
-        #screen.refresh()
-        #time.sleep(1)
         logging.info("render again")
 
 
