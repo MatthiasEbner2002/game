@@ -36,7 +36,6 @@ def shutdown(current_screen, screen):
     c1 = '#'
     x, y = 0, 0
     while x <= size.x - x and y <= size.y - y:
-        color = bcolors.ALL[y % len(bcolors.ALL)]
         for i in range(y, size.y - y, 1):
             current_screen.field[x][i] = c1
             current_screen.field_color[x][i] = x
