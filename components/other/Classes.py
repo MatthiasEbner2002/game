@@ -28,6 +28,12 @@ class Size:
         rows, columns = os.popen('stty size', 'r').read().split()
         return cls(int(rows) - 1, int(columns))
 
+# TODO: make it more efficent
+
+
+def getColorIndex(x):
+    return x % 6 + 1
+
 
 def shutdown(current_screen, screen):
     size = copy.deepcopy(current_screen.size)
@@ -38,7 +44,7 @@ def shutdown(current_screen, screen):
     while x <= size.x - x and y <= size.y - y:
         for i in range(y, size.y - y, 1):
             current_screen.field[x][i] = c1
-            current_screen.field_color[x][i] = x
+            current_screen.field_color[x][i] = getColorIndex(x)
             #self.field[size.x - x][i] = c1
         shutdown_render(current_screen, screen)
 
@@ -50,19 +56,19 @@ def shutdown(current_screen, screen):
         for i in range(x+1, size.x - x, 1):
             #self.field[i][y] = c1
             current_screen.field[i][size.y - y - 1] = c1
-            current_screen.field_color[i][size.y - y - 1] = x
+            current_screen.field_color[i][size.y - y - 1] = getColorIndex(x)
         y = y + 1
 
         for i in range(x+1, size.x - x, 1):
             #self.field[i][y] = c1
             current_screen.field[i][size.y - y - 1] = c1
-            current_screen.field_color[i][size.y - y - 1] = x
+            current_screen.field_color[i][size.y - y - 1] = getColorIndex(x)
         y = y + 1
 
         for i in range(x + 1, size.x - x, 1):
             #self.field[i][y] = c1
             current_screen.field[i][size.y - y - 1] = c1
-            current_screen.field_color[i][size.y - y - 1] = x
+            current_screen.field_color[i][size.y - y - 1] = getColorIndex(x)
         y = y + 1
         x = x + 1
         shutdown_render(current_screen, screen)
@@ -72,7 +78,7 @@ def shutdown(current_screen, screen):
         for i in range(y, size.y - y, 1):
             #self.field[x][i] = c1
             current_screen.field[size.x - x][i] = c1
-            current_screen.field_color[size.x - x][i] = x
+            current_screen.field_color[size.x - x][i] = getColorIndex(x)
         shutdown_render(current_screen, screen)
 
         x = x + 1
@@ -82,21 +88,21 @@ def shutdown(current_screen, screen):
     while x <= size.x - x and y <= size.y - y:
         for i in range(x+1, size.x - x, 1):
             current_screen.field[i][y] = c1
-            current_screen.field_color[i][y] = x
+            current_screen.field_color[i][y] = getColorIndex(x)
         y = y + 1
 
         for i in range(x+1, size.x - x, 1):
             current_screen.field[i][y] = c1
-            current_screen.field_color[i][y] = x
+            current_screen.field_color[i][y] = getColorIndex(x)
         y = y + 1
 
         for i in range(x + 1, size.x - x, 1):
             current_screen.field[i][y] = c1
-            current_screen.field_color[i][y] = x
+            current_screen.field_color[i][y] = getColorIndex(x)
         y = y + 1
         x = x + 1
         shutdown_render(current_screen, screen)
-    time.sleep(.3)
+    time.sleep(0.3)
     quit()
 
 
@@ -113,11 +119,7 @@ def render(current_screen, screen):
         row = ''
         for j in range(size.y):
             #row += current_screen.field[i][j]
-            if current_screen.field_color[i][j] != -1:
-                color = curses.color_pair(
-                    current_screen.field_color[i][j] % 6 + 1)
-                screen.addstr(
-                    i, j, current_screen.field[i][j], color)
-            else:
-                screen.addstr(
-                    i, j, current_screen.field[i][j])
+            color = curses.color_pair(
+                current_screen.field_color[i][j])
+            screen.addstr(
+                i, j, current_screen.field[i][j], color)
