@@ -1,5 +1,5 @@
-import curses
 import logging
+import curses
 from components.screen import Screen
 from components.menus.screen_mainMenu import Screen_MainMenu
 
@@ -9,14 +9,14 @@ def main(screen):
     curses.start_color()
     curses.use_default_colors()
     curses.init_pair(1, 1, -1)                # red
-    curses.init_pair(2, 202, -1)              # orange
+    curses.init_pair(2, 12, -1)              # orange
     curses.init_pair(3, 3, -1)                # yellow
     curses.init_pair(4, 2, -1)                # green
     curses.init_pair(5, 4, -1)                # blue
     curses.init_pair(6, 5, -1)                # purple
 
-    for i in range(4, curses.COLORS):
-        curses.init_pair(i + 1, i, -1)
+   # for i in range(4, 255):
+    #   curses.init_pair(i + 1, i, -1)
 
     logging.basicConfig(filename='log.log',
                         filemode='a',
@@ -24,13 +24,12 @@ def main(screen):
                         datefmt='%H:%M:%S',
                         level=logging.DEBUG)
 
-    num_rows, num_cols = screen.getmaxyx()
-    field = Screen.from_terminal_size(screen)
-    field.item = Screen_MainMenu(field.size)
+    term = Screen.from_terminal_size(screen)
+    term.item = Screen_MainMenu(term)
 
     while (True):
-        field.run(screen)
-        logging.info("render again")
+        term.run(screen)
+        logging.debug("GameStart: render again")
 
 
 if __name__ == '__main__':

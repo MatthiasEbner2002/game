@@ -1,22 +1,20 @@
 from curses.ascii import isdigit
-from components.other.Classes import Menu, Option, shutdown
+from components.other.Classes import Menu, Option, shutdown, Size
+from components.lvl.level1 import Level1
 import logging
-import time
 import math
-import copy
 import curses
 
-
 class Screen_MainMenu:
-    def __init__(self, size):
+    def __init__(self, term):
         self.menu_size_x = 14
         self.menu_size_y = 51
-        self.size = size
+        self.term = term
         self.running = True
-        self.field = [[' ' for i in range(self.size.y)]
-                      for j in range(self.size.x)]
-        self.field_color = [[-1 for i in range(self.size.y)]
-                            for j in range(self.size.x)]
+        self.field = [['.' for i in range(self.term.size.y)]
+                      for j in range(self.term.size.x)]
+        self.field_color = [[-1 for i in range(self.term.size.y)]
+                            for j in range(self.term.size.x)]
         self.item = [
             ' /\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\\',
             '|#################################################|',
@@ -32,10 +30,6 @@ class Screen_MainMenu:
             '|#|_____________________________________________|#|',
             '|#################################################|',
             ' \/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/'
-        ]
-        self.item_color_raw_2 = [
-            [-1, -1, -1, ],
-            []
         ]
 
         self.item_color_raw = [
@@ -70,13 +64,14 @@ class Screen_MainMenu:
         self._generate_field()
 
     def _generate_field(self):
-        start_x = math.floor((self.size.x - self.menu_size_x) / 2)
-        start_y = math.floor((self.size.y - self.menu_size_y) / 2)
+        start_x = math.floor((self.term.size.x - self.menu_size_x) / 2)
+        start_y = math.floor((self.term.size.y - self.menu_size_y) / 2)
 
         for i in range(self.menu_size_x):
             for j in range(self.menu_size_y):
                 self.field[i + start_x][j + start_y] = self.item[i][j]
-                self.field_color[i + start_x][j + start_y] = int(self.item_color[i][j])
+                self.field_color[i + start_x][j +
+                                              start_y] = int(self.item_color[i][j])
 
         aktiv_item = self.menu.option_list[self.menu.aktiv_option]
         for i in range(aktiv_item.lenght):
@@ -84,42 +79,50 @@ class Screen_MainMenu:
                                                aktiv_item.y + i] = '_'
 
     def _clear_field(self):
-        logging.debug("cleaning")
-        # self.field = [[j if j != 1 and j != 2 else 0 for j in i]
-        #             for i in self.field]
-        # self.field = [[' ' for i in range(self.size.y)]
-        #            for j in range(self.size.x)]
+        logging.debug("MainMenu: cleaning")
 
     def _move(self, screen):
         ch = screen.getch()
         if ch != -1:
-            if ch == curses.KEY_LEFT:
+            if ch == curses.KEY_LEFT or ch == 97:  # A
                 self.menu.aktiv_option = (
                     self.menu.aktiv_option - 1) % self.menu.anzahl_options
-            elif ch == curses.KEY_RIGHT:
+            elif ch == curses.KEY_RIGHT or ch == 100:  # D
                 self.menu.aktiv_option = (
                     self.menu.aktiv_option + 1) % self.menu.anzahl_options
             elif ch == 10:  # ENTER
                 self._enter(self.menu.aktiv_option, screen)
-            elif ch == 112:
+            elif ch == 112:  # P
                 self._enter(0, screen)
-            elif ch == 115:
+            elif ch == 115:  # S
                 self._enter(1, screen)
-            elif ch == 113:
+            elif ch == 113:  # Q
                 self._enter(2, screen)
         return
 
     def _enter(self, option, screen):
         if option == 0:
-            logging.debug("PLAY")
+            logging.debug("MainMenu: PLAY")
+            lvl = Level1(self.term)
+            self.changeScreen(lvl)
         elif option == 1:
-            logging.debug("SETTING")
+            logging.debug("MainMenu: SETTING")
+            self.changeScreen(None)
         elif option == 2:
-            logging.debug("QUITING")
+            logging.debug("MainMenu: QUITING")
             shutdown(self, screen)
 
+    def changeScreen(self, option):
+        if(option != None):
+            self.term.item = option
+            self.running = False
+        else:
+            logging.error("MainMenu: Change Screen without new Screen!")
+            self.term.item = None
+            self.running = False
+
     def render(self, screen):
-        size = self.size
+        size = self.term.size
         # self._clear_field()
         for i in range(size.x):
             for j in range(size.y):
@@ -127,8 +130,19 @@ class Screen_MainMenu:
                 screen.addstr(i, j, self.field[i][j], color)
 
     def run(self, screen):
+        logging.debug("MainMenu: start running")
         while self.running:
+            x, y = screen.getmaxyx()
+            if self.term.size.x - 1 != x or self.term.size.y != y:
+                self.resize(screen)
             self._generate_field()
             self.render(screen)
             screen.refresh()
             self._move(screen)
+
+    def resize(self, screen):
+        self.term.size = Size.from_terminal_size(screen)
+        self.field = [['.' for i in range(self.term.size.y)]
+                      for j in range(self.term.size.x)]
+        self.field_color = [[-1 for i in range(self.term.size.y)]
+                            for j in range(self.term.size.x)]

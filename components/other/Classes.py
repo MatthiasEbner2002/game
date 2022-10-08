@@ -2,6 +2,7 @@ import os
 import copy
 import time
 import curses
+import logging
 
 
 class Menu:
@@ -24,19 +25,18 @@ class Size:
         self.y = (1, y)[y >= 1]
 
     @classmethod
-    def from_terminal_size(cls):
-        rows, columns = os.popen('stty size', 'r').read().split()
+    def from_terminal_size(cls, screen):
+        rows, columns = screen.getmaxyx()
         return cls(int(rows) - 1, int(columns))
 
 # TODO: make it more efficent
-
 
 def getColorIndex(x):
     return x % 6 + 1
 
 
 def shutdown(current_screen, screen):
-    size = copy.deepcopy(current_screen.size)
+    size = copy.deepcopy(current_screen.term.size)
     size.x = size.x - 1
     size.y = size.y
     c1 = '#'
@@ -114,7 +114,7 @@ def shutdown_render(self, screen):
 
 
 def render(current_screen, screen):
-    size = current_screen.size
+    size = current_screen.term.size
     for i in range(size.x):
         row = ''
         for j in range(size.y):
@@ -123,3 +123,9 @@ def render(current_screen, screen):
                 current_screen.field_color[i][j])
             screen.addstr(
                 i, j, current_screen.field[i][j], color)
+
+class Player:
+    def __init__(self):
+        self.x = 10
+        self.y = 10
+    

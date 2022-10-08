@@ -8,13 +8,11 @@ class Screen:
         self.screen = screen
         self.size = Size(x, y)
         self.backup = Backup(self.size)
-        self.field = [['.' for i in range(self.size.y)]
-                      for j in range(self.size.x)]
         # self._generate_field()
 
     @classmethod
     def from_terminal_size(cls, screen):
-        size = Size.from_terminal_size()
+        size = Size.from_terminal_size(screen)
         return cls(size.x, size.y, screen)
 
     def _generate_field(self):
@@ -44,7 +42,7 @@ class Screen:
 class Backup:
     def __init__(self, size):
         self.size = size
-        self.message = 'no module found!'
+        self.message = '!! Error: no module found! (press any key to quit) !!'
         self.field = [[' ' for i in range(self.size.y)]
                       for j in range(self.size.x)]
 
@@ -53,10 +51,14 @@ class Backup:
                       for i in self.field]
 
     def render(self, screen):
-        screen.addstr(0, 0, "Error: " + self.message)
+        screen.addstr(0, 0, self.message)
 
     def _generate_field(self):
-        logging.error("Generate Field without a item to render!")
+        logging.error("Backup: Generate Field without a item to render!")
 
-    def run(self):
-        logging.error("updating without a item to run!")
+    def run(self, screen):
+        logging.error("Backup: updating without a item to run!")
+        self.render(screen)
+        screen.refresh()
+        screen.getch()
+        quit();
