@@ -97,8 +97,8 @@ class Level1:
 
             if (datetime.now()-start).total_seconds() > 0.1:
                 #if self.player_x_input != 0 or self.player_y_input != 0:
-                logging.debug("x= " + str(self.player_x_input) +
-                                ", y= " + str(self.player_y_input))
+                #logging.debug("x= " + str(self.player_x_input) +
+                #                ", y= " + str(self.player_y_input))
                 start = datetime.now()
                 self._generate_field(True)
                 #else:
@@ -108,7 +108,7 @@ class Level1:
             self.render(screen)
             screen.refresh()
             time.sleep(0.025)
-            logging.debug("round:" + str(datetime.now() - start1))
+            #logging.debug("round:" + str(datetime.now() - start1))
             start1 = datetime.now()
         new_thread.join()
 
