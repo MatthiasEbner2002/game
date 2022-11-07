@@ -14,27 +14,39 @@ class Level1:
     def __init__(self, term):
         self.size_x = 100
         self.size_y = 100
+
         self.actual_position_x = 0
         self.actual_position_y = 0
+
         self.term = term
         self.player = '█'
+
         self.player_x = 10
         self.player_y = 10
+
         self.player_x_input = 0
         self.player_y_input = 0
+
+        self.player_attack = 0
+        self.player_attack_start_position = (0,0)
+        self.player_attack_step = 0
+
         self.running = True
         self.field = None
+
         self.setStartField()
         self.show_field = [[' ' for i in range(self.term.size.y)]
                            for j in range(self.term.size.x)]
         self._generate_field(True)
 
     def _generate_field(self, renderPlayer):
+        # Get x-size to render
         if self.term.size.x >= self.size_x:
             x = self.size_x
         else:
             x = self.term.size.x
 
+        # Get y-size to render
         if self.term.size.y >= self.size_y:
             y = self.size_y
         else:
@@ -44,6 +56,21 @@ class Level1:
             for j in range(self.actual_position_y, y + self.actual_position_y):
                 self.show_field[i - self.actual_position_x][j -
                                                             self.actual_position_y] = self.field[i][j]
+        if self.player_attack == 1:
+            self.player_attack_step += 1
+            if self.player_attack_step > 8:
+                self.player_attack = 0
+                self.player_attack_step = 0
+            else:
+                for i in range(self.player_attack_start_position[0] - (self.player_attack_step), self.player_attack_start_position[0] + (self.player_attack_step + 1)):
+                    self.show_field[i][self.player_attack_start_position[1] + (self.player_attack_step)] = '|'
+                    self.show_field[i][self.player_attack_start_position[1] - (self.player_attack_step)] = '|'
+                for i in range(self.player_attack_start_position[1] - (self.player_attack_step), self.player_attack_start_position[0] + (self.player_attack_step + 1)):
+                    self.show_field[self.player_attack_start_position[0] + (self.player_attack_step)][i] = '-'
+                    self.show_field[self.player_attack_start_position[0] - (self.player_attack_step)][i] = '-'
+                    
+        
+        # Check if Player moved
         if renderPlayer:
             mutex_y.acquire()
             self.player_y = self.player_y + self.player_y_input
@@ -83,7 +110,9 @@ class Level1:
                 screen.addstr(i, j, self.show_field[i][j], color)
 
     def run(self, screen):
-        keyboard.add_hotkey('p', exit)
+        # Hotkey 'q' to exit game
+        keyboard.add_hotkey('q', exit)
+        # start player-Thread with gets input from keyboard (daemon = stop if program is terminated)
         new_thread = Thread(target=player, args=(self,), daemon=True)
         new_thread.start()
         logging.debug("start running")
@@ -95,20 +124,20 @@ class Level1:
             if self.term.size.x - 1 != x or self.term.size.y != y:
                 self.resize(screen)
 
-            if (datetime.now()-start).total_seconds() > 0.1:
-                #if self.player_x_input != 0 or self.player_y_input != 0:
-                #logging.debug("x= " + str(self.player_x_input) +
-                #                ", y= " + str(self.player_y_input))
-                start = datetime.now()
-                self._generate_field(True)
-                #else:
-                 #   self._generate_field(False)
+            if (datetime.now() - start).total_seconds() > 0.1:
+                if self.player_x_input != 0 or self.player_y_input != 0:
+                    logging.debug("Input received: " + str(start) + ", x: " + str(self.player_x_input) + ", y: " + str(self.player_y_input) )
+                    start = datetime.now()
+                    self._generate_field(True)
+                else:
+                    self._generate_field(False)
+                    time.sleep(0.025)
             else:
                 self._generate_field(False)
+                time.sleep(0.025)
             self.render(screen)
             screen.refresh()
-            time.sleep(0.025)
-            #logging.debug("round:" + str(datetime.now() - start1))
+            # logging.debug("Input received: " + str(start1))
             start1 = datetime.now()
         new_thread.join()
 
@@ -133,6 +162,7 @@ class Level1:
 
 def exit():
     quit()
+
 def player(lvl1):
     while True:
         if keyboard.is_pressed('a'):
@@ -151,4 +181,7 @@ def player(lvl1):
             mutex_x.acquire()    
             lvl1.player_x_input = 1 if lvl1.player_x_input == 0 else 0
             mutex_x.release()
+        if keyboard.is_pressed('o'):
+            lvl1.player_attack = 1
+            lvl1.player_attack_start_position = (lvl1.player_x, lvl1.player_y)
         time.sleep(0.001)

@@ -1,0 +1,53 @@
+09:47:16 | root | DEBUG MainMenu: start running
+09:47:17 | root | DEBUG MainMenu: PLAY
+09:47:17 | root | DEBUG Level1: finished generate Field
+09:47:17 | root | DEBUG GameStart: render again
+09:47:17 | root | DEBUG start running
+09:47:18 | root | DEBUG Input received: 2022-11-04 09:47:17.801472, x: 0, y: 1
+09:47:19 | root | DEBUG Input received: 2022-11-04 09:47:18.838909, x: 0, y: 1
+09:47:20 | root | DEBUG Input received: 2022-11-04 09:47:19.852702, x: 0, y: 1
+09:47:20 | root | DEBUG Input received: 2022-11-04 09:47:20.010552, x: 0, y: 1
+09:47:20 | root | DEBUG Input received: 2022-11-04 09:47:20.136375, x: 0, y: 1
+09:47:20 | root | DEBUG Input received: 2022-11-04 09:47:20.263214, x: 0, y: 1
+09:47:20 | root | DEBUG Input received: 2022-11-04 09:47:20.515186, x: 0, y: 1
+09:47:57 | root | DEBUG MainMenu: start running
+09:47:58 | root | DEBUG MainMenu: PLAY
+09:47:58 | root | DEBUG Level1: finished generate Field
+09:47:58 | root | DEBUG GameStart: render again
+09:47:58 | root | DEBUG start running
+09:48:44 | root | DEBUG MainMenu: start running
+09:48:45 | root | DEBUG MainMenu: PLAY
+09:48:45 | root | DEBUG Level1: finished generate Field
+09:48:45 | root | DEBUG GameStart: render again
+09:48:45 | root | DEBUG start running
+09:48:47 | root | DEBUG Input received: 2022-11-04 09:48:45.254037, x: 0, y: 1
+09:48:47 | root | DEBUG Input received: 2022-11-04 09:48:47.723964, x: 0, y: 1
+09:48:47 | root | DEBUG Input received: 2022-11-04 09:48:47.850203, x: 0, y: 1
+09:49:09 | root | DEBUG MainMenu: start running
+09:49:11 | root | DEBUG MainMenu: PLAY
+09:49:11 | root | DEBUG Level1: finished generate Field
+09:49:11 | root | DEBUG GameStart: render again
+09:49:11 | root | DEBUG start running
+09:49:57 | root | DEBUG MainMenu: start running
+09:49:58 | root | DEBUG MainMenu: PLAY
+09:49:58 | root | DEBUG Level1: finished generate Field
+09:49:58 | root | DEBUG GameStart: render again
+09:49:58 | root | DEBUG start running
+09:49:58 | root | DEBUG Input received: 2022-11-04 09:49:58.193998, x: 0, y: 1
+09:49:58 | root | DEBUG Input received: 2022-11-04 09:49:58.541163, x: 0, y: 1
+09:49:58 | root | DEBUG Input received: 2022-11-04 09:49:58.765720, x: 0, y: 1
+09:49:58 | root | DEBUG Input received: 2022-11-04 09:49:58.890908, x: 0, y: 1
+09:49:59 | root | DEBUG Input received: 2022-11-04 09:49:59.002230, x: 0, y: 1
+09:50:18 | root | DEBUG MainMenu: start running
+09:50:19 | root | DEBUG MainMenu: PLAY
+09:50:19 | root | DEBUG Level1: finished generate Field
+09:50:19 | root | DEBUG GameStart: render again
+09:50:19 | root | DEBUG start running
+09:50:20 | root | DEBUG Input received: 2022-11-04 09:50:19.708178, x: 0, y: 1
+09:50:20 | root | DEBUG Input received: 2022-11-04 09:50:20.586712, x: 0, y: 1
+09:50:20 | root | DEBUG Input received: 2022-11-04 09:50:20.778306, x: 0, y: 1
+09:50:21 | root | DEBUG Input received: 2022-11-04 09:50:20.889100, x: 0, y: 1
+09:50:21 | root | DEBUG Input received: 2022-11-04 09:50:21.106190, x: 0, y: 1
+09:50:21 | root | DEBUG Input received: 2022-11-04 09:50:21.232338, x: 0, y: 1
+09:50:21 | root | DEBUG Input received: 2022-11-04 09:50:21.358166, x: 0, y: 1
+09:50:21 | root | DEBUG Input received: 2022-11-04 09:50:21.484717, x: 0, y: 1
