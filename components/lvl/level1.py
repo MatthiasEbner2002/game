@@ -63,12 +63,18 @@ class Level1:
                 self.player_attack_step = 0
             else:
                 for i in range(self.player_attack_start_position[0] - (self.player_attack_step), self.player_attack_start_position[0] + (self.player_attack_step + 1)):
-                    self.show_field[i][self.player_attack_start_position[1] + (self.player_attack_step)] = '|'
-                    self.show_field[i][self.player_attack_start_position[1] - (self.player_attack_step)] = '|'
-                for i in range(self.player_attack_start_position[1] - (self.player_attack_step), self.player_attack_start_position[0] + (self.player_attack_step + 1)):
-                    self.show_field[self.player_attack_start_position[0] + (self.player_attack_step)][i] = '-'
-                    self.show_field[self.player_attack_start_position[0] - (self.player_attack_step)][i] = '-'
-                    
+                    self.show_field[i][self.player_attack_start_position[1] + (self.player_attack_step)] = '│'
+                    self.show_field[i][self.player_attack_start_position[1] - (self.player_attack_step)] = '│'
+
+                for i in range(self.player_attack_start_position[1] - (self.player_attack_step), self.player_attack_start_position[1] + (self.player_attack_step + 1)):
+                    self.show_field[self.player_attack_start_position[0] + (self.player_attack_step)][i] = '─'
+                    self.show_field[self.player_attack_start_position[0] - (self.player_attack_step)][i] = '─'
+                
+                self.show_field[self.player_attack_start_position[0] - (self.player_attack_step)][self.player_attack_start_position[1] - (self.player_attack_step)] = '╭'
+                self.show_field[self.player_attack_start_position[0] + (self.player_attack_step)][self.player_attack_start_position[1] - (self.player_attack_step)] = '╰'
+
+                self.show_field[self.player_attack_start_position[0] - (self.player_attack_step)][self.player_attack_start_position[1] + (self.player_attack_step)] = '╮'
+                self.show_field[self.player_attack_start_position[0] + (self.player_attack_step)][self.player_attack_start_position[1] + (self.player_attack_step)] = '╯'
         
         # Check if Player moved
         if renderPlayer:
