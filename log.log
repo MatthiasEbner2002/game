@@ -1,68 +1,53 @@
-12:50:37 | root | DEBUG MainMenu: start running
-12:50:39 | root | DEBUG MainMenu: SETTING
-12:50:39 | root | ERROR MainMenu: Change Screen without new Screen!
-12:50:39 | root | DEBUG GameStart: render again
-12:50:39 | root | ERROR Backup: updating without a item to run!
-12:50:42 | root | DEBUG MainMenu: start running
-12:50:43 | root | DEBUG MainMenu: QUITING
-12:50:48 | root | DEBUG MainMenu: start running
-12:50:49 | root | DEBUG MainMenu: PLAY
-12:50:49 | root | DEBUG Level1: finished generate Field
-12:50:49 | root | DEBUG GameStart: render again
-12:50:49 | root | DEBUG start running
-12:52:51 | root | DEBUG MainMenu: start running
-12:52:52 | root | DEBUG MainMenu: PLAY
-12:52:52 | root | DEBUG Level1: finished generate Field
-12:52:52 | root | DEBUG GameStart: render again
-12:52:52 | root | DEBUG start running
-12:59:29 | root | DEBUG MainMenu: start running
-12:59:30 | root | DEBUG MainMenu: PLAY
-12:59:30 | root | DEBUG Level1: finished generate Field
-12:59:30 | root | DEBUG GameStart: render again
-12:59:30 | root | DEBUG start running
-12:59:57 | root | DEBUG MainMenu: start running
-12:59:59 | root | DEBUG MainMenu: SETTING
-12:59:59 | root | ERROR MainMenu: Change Screen without new Screen!
-12:59:59 | root | DEBUG GameStart: render again
-12:59:59 | root | ERROR Backup: updating without a item to run!
-13:00:01 | root | DEBUG MainMenu: start running
-13:00:01 | root | DEBUG MainMenu: QUITING
-13:00:05 | root | DEBUG MainMenu: start running
-13:00:06 | root | DEBUG MainMenu: PLAY
-13:00:06 | root | DEBUG Level1: finished generate Field
-13:00:06 | root | DEBUG GameStart: render again
-13:00:06 | root | DEBUG start running
-13:02:33 | root | DEBUG MainMenu: start running
-13:02:33 | root | DEBUG MainMenu: PLAY
-13:02:33 | root | DEBUG Level1: finished generate Field
-13:02:33 | root | DEBUG GameStart: render again
-13:02:33 | root | DEBUG start running
-13:03:10 | root | DEBUG MainMenu: start running
-13:03:11 | root | DEBUG MainMenu: SETTING
-13:03:11 | root | ERROR MainMenu: Change Screen without new Screen!
-13:03:11 | root | DEBUG GameStart: render again
-13:03:11 | root | ERROR Backup: updating without a item to run!
-13:03:14 | root | DEBUG MainMenu: start running
-13:03:15 | root | DEBUG MainMenu: QUITING
-13:03:19 | root | DEBUG MainMenu: start running
-13:03:19 | root | DEBUG MainMenu: PLAY
-13:03:19 | root | DEBUG Level1: finished generate Field
-13:03:19 | root | DEBUG GameStart: render again
-13:03:19 | root | DEBUG start running
-13:04:18 | root | DEBUG MainMenu: start running
-13:04:19 | root | DEBUG MainMenu: SETTING
-13:04:19 | root | ERROR MainMenu: Change Screen without new Screen!
-13:04:19 | root | DEBUG GameStart: render again
-13:04:19 | root | ERROR Backup: updating without a item to run!
-13:04:21 | root | DEBUG MainMenu: start running
-13:04:22 | root | DEBUG MainMenu: QUITING
-13:04:25 | root | DEBUG MainMenu: start running
-13:04:26 | root | DEBUG MainMenu: PLAY
-13:04:26 | root | DEBUG Level1: finished generate Field
-13:04:26 | root | DEBUG GameStart: render again
-13:04:26 | root | DEBUG start running
-13:13:20 | root | DEBUG MainMenu: start running
-13:13:20 | root | DEBUG MainMenu: PLAY
-13:13:20 | root | DEBUG Level1: finished generate Field
-13:13:20 | root | DEBUG GameStart: render again
-13:13:20 | root | DEBUG start running
+17:09:16 | root | DEBUG MainMenu: start running
+17:09:17 | root | DEBUG MainMenu: PLAY
+17:09:17 | root | DEBUG Level1: finished generate Field
+17:09:17 | root | DEBUG player is moving2022-11-08 17:09:17.873146
+17:09:17 | root | DEBUG GameStart: render again
+17:09:17 | root | DEBUG start running
+17:09:19 | root | DEBUG player is moving2022-11-08 17:09:19.088613
+17:09:19 | root | DEBUG player is moving2022-11-08 17:09:19.197005
+17:09:19 | root | DEBUG player is moving2022-11-08 17:09:19.318846
+17:09:19 | root | DEBUG player is moving2022-11-08 17:09:19.444565
+17:09:19 | root | DEBUG player is moving2022-11-08 17:09:19.571243
+17:09:19 | root | DEBUG player is moving2022-11-08 17:09:19.700626
+17:09:19 | root | DEBUG player is moving2022-11-08 17:09:19.826871
+17:09:19 | root | DEBUG player is moving2022-11-08 17:09:19.952920
+17:09:20 | root | DEBUG player is moving2022-11-08 17:09:20.078748
+17:09:20 | root | DEBUG player is moving2022-11-08 17:09:20.205062
+17:09:20 | root | DEBUG player is moving2022-11-08 17:09:20.332815
+17:09:20 | root | DEBUG player is moving2022-11-08 17:09:20.461061
+17:09:20 | root | DEBUG player is moving2022-11-08 17:09:20.589437
+17:09:20 | root | DEBUG player is moving2022-11-08 17:09:20.697723
+17:09:20 | root | DEBUG player is moving2022-11-08 17:09:20.824237
+17:09:20 | root | DEBUG player is moving2022-11-08 17:09:20.950549
+17:09:21 | root | DEBUG player is moving2022-11-08 17:09:21.077336
+17:09:21 | root | DEBUG player is moving2022-11-08 17:09:21.204398
+17:09:21 | root | DEBUG player is moving2022-11-08 17:09:21.330241
+17:09:21 | root | DEBUG player is moving2022-11-08 17:09:21.456685
+17:09:21 | root | DEBUG player is moving2022-11-08 17:09:21.583088
+17:09:21 | root | DEBUG player is moving2022-11-08 17:09:21.710215
+17:09:21 | root | DEBUG player is moving2022-11-08 17:09:21.836468
+17:09:21 | root | DEBUG player is moving2022-11-08 17:09:21.962957
+17:09:22 | root | DEBUG player is moving2022-11-08 17:09:22.089878
+17:09:22 | root | DEBUG player is moving2022-11-08 17:09:22.217090
+17:09:22 | root | DEBUG player is moving2022-11-08 17:09:22.343802
+17:09:22 | root | DEBUG player is moving2022-11-08 17:09:22.469773
+17:09:22 | root | DEBUG player is moving2022-11-08 17:09:22.598791
+17:09:22 | root | DEBUG player is moving2022-11-08 17:09:22.723951
+17:09:22 | root | DEBUG player is moving2022-11-08 17:09:22.850776
+17:09:22 | root | DEBUG player is moving2022-11-08 17:09:22.976874
+17:09:23 | root | DEBUG player is moving2022-11-08 17:09:23.104153
+17:09:23 | root | DEBUG player is moving2022-11-08 17:09:23.233376
+17:09:23 | root | DEBUG player is moving2022-11-08 17:09:23.358163
+17:09:23 | root | DEBUG player is moving2022-11-08 17:09:23.483759
+17:09:23 | root | DEBUG player is moving2022-11-08 17:09:23.610846
+17:09:23 | root | DEBUG player is moving2022-11-08 17:09:23.736939
+17:09:23 | root | DEBUG player is moving2022-11-08 17:09:23.863740
+17:09:23 | root | DEBUG player is moving2022-11-08 17:09:23.990442
+17:09:24 | root | DEBUG player is moving2022-11-08 17:09:24.118366
+17:09:24 | root | DEBUG player is moving2022-11-08 17:09:24.243015
+17:09:24 | root | DEBUG player is moving2022-11-08 17:09:24.369202
+17:09:24 | root | DEBUG player is moving2022-11-08 17:09:24.495789
+17:09:24 | root | DEBUG player is moving2022-11-08 17:09:24.624505
+17:09:24 | root | DEBUG player is moving2022-11-08 17:09:24.749063
+17:09:24 | root | DEBUG player is moving2022-11-08 17:09:24.876259

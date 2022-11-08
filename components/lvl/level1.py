@@ -18,6 +18,11 @@ class Level1:
         self.actual_position_x = 0
         self.actual_position_y = 0
 
+        self.input_a = 0
+        self.input_d = 0
+        self.input_w = 0
+        self.input_s = 0
+
         self.term = term
         self.player = '█'
 
@@ -60,34 +65,35 @@ class Level1:
                                                             self.actual_position_y] = self.field[i][j]
         if self.player_attack == 1:
             self.player_attack_step += 1
-            if self.player_attack_step > 8:
+            if self.player_attack_step > 20:
                 self.player_attack = 0
                 self.player_attack_step = 0
             else:
-                for i in range(self.player_attack_start_position[0] - (self.player_attack_step), self.player_attack_start_position[0] + (self.player_attack_step + 1)):
-                    if (self.player_attack_start_position[1] + (self.player_attack_step) < y - 1  and i > 0 and i < x - 1): 
-                        self.show_field[i][self.player_attack_start_position[1] + (self.player_attack_step)] = '│'
-                    if self.player_attack_start_position[1] - (self.player_attack_step) > 0 and i > 0 and i < x -1:
-                        self.show_field[i][self.player_attack_start_position[1] - (self.player_attack_step)] = '│'
+                for i in range(self.player_x - (self.player_attack_step), self.player_x + (self.player_attack_step + 1)):
+                    if (self.player_y + (self.player_attack_step) < y - 1  and i > 0 and i < x - 1): 
+                        self.show_field[i][self.player_y + (self.player_attack_step)] = '│'
+                    if self.player_y - (self.player_attack_step) > 0 and i > 0 and i < x -1:
+                        self.show_field[i][self.player_y - (self.player_attack_step)] = '│'
 
-                for i in range(self.player_attack_start_position[1] - (self.player_attack_step), self.player_attack_start_position[1] + (self.player_attack_step + 1)):
-                    if self.player_attack_start_position[0] + self.player_attack_step < x - 1 and i > 0 and i < y - 1: 
-                        self.show_field[self.player_attack_start_position[0] + (self.player_attack_step)][i] = '─'
-                    if self.player_attack_start_position[0] - self.player_attack_step > 0 and i > 0 and i < y - 1:
-                        self.show_field[self.player_attack_start_position[0] - (self.player_attack_step)][i] = '─'
+                for i in range(self.player_y - (self.player_attack_step), self.player_y + (self.player_attack_step + 1)):
+                    if self.player_x + self.player_attack_step < x - 1 and i > 0 and i < y - 1: 
+                        self.show_field[self.player_x + (self.player_attack_step)][i] = '─'
+                    if self.player_x - self.player_attack_step > 0 and i > 0 and i < y - 1:
+                        self.show_field[self.player_x - (self.player_attack_step)][i] = '─'
                 
-                if self.player_attack_start_position[0] - (self.player_attack_step) > 0 and self.player_attack_start_position[1] - (self.player_attack_step) > 0:
-                    self.show_field[self.player_attack_start_position[0] - (self.player_attack_step)][self.player_attack_start_position[1] - (self.player_attack_step)] = '╭'
-                if self.player_attack_start_position[0] + (self.player_attack_step) < x - 1 and self.player_attack_start_position[1] - (self.player_attack_step) > 0:
-                    self.show_field[self.player_attack_start_position[0] + (self.player_attack_step)][self.player_attack_start_position[1] - (self.player_attack_step)] = '╰'
+                if self.player_x - (self.player_attack_step) > 0 and self.player_y - (self.player_attack_step) > 0:
+                    self.show_field[self.player_x - (self.player_attack_step)][self.player_y - (self.player_attack_step)] = '╭'
+                if self.player_x + (self.player_attack_step) < x - 1 and self.player_y - (self.player_attack_step) > 0:
+                    self.show_field[self.player_x + (self.player_attack_step)][self.player_y - (self.player_attack_step)] = '╰'
 
-                if self.player_attack_start_position[0] - (self.player_attack_step) > 0 and self.player_attack_start_position[1] + (self.player_attack_step) < y - 1:
-                    self.show_field[self.player_attack_start_position[0] - (self.player_attack_step)][self.player_attack_start_position[1] + (self.player_attack_step)] = '╮'
-                if self.player_attack_start_position[0] + (self.player_attack_step) < x - 1 and self.player_attack_start_position[1] + (self.player_attack_step) < y - 1:
-                    self.show_field[self.player_attack_start_position[0] + (self.player_attack_step)][self.player_attack_start_position[1] + (self.player_attack_step)] = '╯'
+                if self.player_x - (self.player_attack_step) > 0 and self.player_y + (self.player_attack_step) < y - 1:
+                    self.show_field[self.player_x - (self.player_attack_step)][self.player_y + (self.player_attack_step)] = '╮'
+                if self.player_x + (self.player_attack_step) < x - 1 and self.player_y + (self.player_attack_step) < y - 1:
+                    self.show_field[self.player_x + (self.player_attack_step)][self.player_y + (self.player_attack_step)] = '╯'
         
         # Check if Player moved
         if renderPlayer:
+            logging.debug("player is moving" + str(datetime.now()))
             mutex_x.acquire()
             if self.player_x + self.player_x_input > 0 and self.player_x + self.player_x_input < x - 1:    
                 if self.player_x_input == 1 and self.player_x > x -  self.player_border_distance and self.actual_position_x + x < self.size_x:
@@ -135,19 +141,27 @@ class Level1:
 
     def render(self, screen):
         size = self.term.size
-        # self._clear_field()
         for i in range(size.x):
             for j in range(size.y):
                 color = curses.color_pair(-1)
                 screen.addstr(i, j, self.show_field[i][j], color)
 
     def run(self, screen):
-        # Hotkey 'q' to exit game
-        #
-        # keyboard.add_hotkey('q', exit)
-        # start player-Thread with gets input from keyboard (daemon = stop if program is terminated)
-        new_thread = Thread(target=player, args=(self,), daemon=True)
-        new_thread.start()
+        keyboard.on_press_key('a', lambda _:self.key_down('a'))
+        keyboard.on_press_key('d', lambda _:self.key_down('d'))
+        keyboard.on_press_key('s', lambda _:self.key_down('s'))
+        keyboard.on_press_key('w', lambda _:self.key_down('w'))
+
+        keyboard.on_release_key('a', lambda _:self.key_up('a'))
+        keyboard.on_release_key('d', lambda _:self.key_up('d'))
+        keyboard.on_release_key('s', lambda _:self.key_up('s'))
+        keyboard.on_release_key('w', lambda _:self.key_up('w'))
+
+        keyboard.on_press_key('q', lambda _:exit())
+        keyboard.on_press_key('e', lambda _:self.attack())
+
+        # new_thread = Thread(target=player, args=(self,), daemon=True)
+        # new_thread.start()
         logging.debug("start running")
         start = datetime.now()
 
@@ -156,7 +170,9 @@ class Level1:
             if self.term.size.x - 1 != x or self.term.size.y != y:
                 self.resize(screen)
 
-            if (datetime.now() - start).total_seconds() > 0.1:
+            if (datetime.now() - start).total_seconds() > 0.05:
+                self.player_y_input = self.input_d - self.input_a
+                self.player_x_input = self.input_s - self.input_w
                 if self.player_x_input != 0 or self.player_y_input != 0:
                     # logging.debug("Input received: " + str(start) + ", x: " + str(self.player_x_input) + ", y: " + str(self.player_y_input) )
                     start = datetime.now()
@@ -169,7 +185,7 @@ class Level1:
                 time.sleep(0.025)
             self.render(screen)
             screen.refresh()
-        new_thread.join()
+        # new_thread.join()
 
     def resize(self, screen):
         self.term.size = Size.from_terminal_size(screen)
@@ -190,10 +206,35 @@ class Level1:
         self.field[self.size_x - 1][self.size_y - 1] = '╝'
         logging.debug("Level1: finished generate Field")
 
+    
 
+    def key_down(self, key):
+        match key:
+            case 'a':
+                self.input_a = 1 
+            case 'd':
+                self.input_d = 1
+            case 'w':
+                self.input_w = 1
+            case 's':
+                self.input_s = 1
+
+    def key_up(self, key):
+        match key:
+            case 'a':
+                self.input_a = 0 
+            case 'd':
+                self.input_d = 0
+            case 'w':
+                self.input_w = 0
+            case 's':
+                self.input_s = 0
+
+    def attack(self):
+        self.player_attack = 1
 def exit():
     quit()
-
+"""
 def player(lvl1):
     while True:
         if keyboard.is_pressed('a'):
@@ -216,3 +257,4 @@ def player(lvl1):
             lvl1.player_attack = 1
             lvl1.player_attack_start_position = (lvl1.player_x, lvl1.player_y)
         time.sleep(0.001)
+"""
