@@ -24,6 +24,8 @@ class Level1:
         self.player_x = 10
         self.player_y = 10
 
+        self.player_border_distance = 8
+
         self.player_x_input = 0
         self.player_y_input = 0
 
@@ -63,26 +65,34 @@ class Level1:
                 self.player_attack_step = 0
             else:
                 for i in range(self.player_attack_start_position[0] - (self.player_attack_step), self.player_attack_start_position[0] + (self.player_attack_step + 1)):
-                    self.show_field[i][self.player_attack_start_position[1] + (self.player_attack_step)] = '│'
-                    self.show_field[i][self.player_attack_start_position[1] - (self.player_attack_step)] = '│'
+                    if (self.player_attack_start_position[1] + (self.player_attack_step) < y - 1  and i > 0 and i < x - 1): 
+                        self.show_field[i][self.player_attack_start_position[1] + (self.player_attack_step)] = '│'
+                    if self.player_attack_start_position[1] - (self.player_attack_step) > 0 and i > 0 and i < x -1:
+                        self.show_field[i][self.player_attack_start_position[1] - (self.player_attack_step)] = '│'
 
                 for i in range(self.player_attack_start_position[1] - (self.player_attack_step), self.player_attack_start_position[1] + (self.player_attack_step + 1)):
-                    self.show_field[self.player_attack_start_position[0] + (self.player_attack_step)][i] = '─'
-                    self.show_field[self.player_attack_start_position[0] - (self.player_attack_step)][i] = '─'
+                    if self.player_attack_start_position[0] + self.player_attack_step < x - 1 and i > 0 and i < y - 1: 
+                        self.show_field[self.player_attack_start_position[0] + (self.player_attack_step)][i] = '─'
+                    if self.player_attack_start_position[0] - self.player_attack_step > 0 and i > 0 and i < y - 1:
+                        self.show_field[self.player_attack_start_position[0] - (self.player_attack_step)][i] = '─'
                 
-                self.show_field[self.player_attack_start_position[0] - (self.player_attack_step)][self.player_attack_start_position[1] - (self.player_attack_step)] = '╭'
-                self.show_field[self.player_attack_start_position[0] + (self.player_attack_step)][self.player_attack_start_position[1] - (self.player_attack_step)] = '╰'
+                if self.player_attack_start_position[0] - (self.player_attack_step) > 0 and self.player_attack_start_position[1] - (self.player_attack_step) > 0:
+                    self.show_field[self.player_attack_start_position[0] - (self.player_attack_step)][self.player_attack_start_position[1] - (self.player_attack_step)] = '╭'
+                if self.player_attack_start_position[0] + (self.player_attack_step) < x - 1 and self.player_attack_start_position[1] - (self.player_attack_step) > 0:
+                    self.show_field[self.player_attack_start_position[0] + (self.player_attack_step)][self.player_attack_start_position[1] - (self.player_attack_step)] = '╰'
 
-                self.show_field[self.player_attack_start_position[0] - (self.player_attack_step)][self.player_attack_start_position[1] + (self.player_attack_step)] = '╮'
-                self.show_field[self.player_attack_start_position[0] + (self.player_attack_step)][self.player_attack_start_position[1] + (self.player_attack_step)] = '╯'
+                if self.player_attack_start_position[0] - (self.player_attack_step) > 0 and self.player_attack_start_position[1] + (self.player_attack_step) < y - 1:
+                    self.show_field[self.player_attack_start_position[0] - (self.player_attack_step)][self.player_attack_start_position[1] + (self.player_attack_step)] = '╮'
+                if self.player_attack_start_position[0] + (self.player_attack_step) < x - 1 and self.player_attack_start_position[1] + (self.player_attack_step) < y - 1:
+                    self.show_field[self.player_attack_start_position[0] + (self.player_attack_step)][self.player_attack_start_position[1] + (self.player_attack_step)] = '╯'
         
         # Check if Player moved
         if renderPlayer:
             mutex_x.acquire()
             if self.player_x + self.player_x_input > 0 and self.player_x + self.player_x_input < x - 1:    
-                if self.player_x_input == 1 and self.player_x > x - 10 and self.actual_position_x + x < self.size_x:
+                if self.player_x_input == 1 and self.player_x > x -  self.player_border_distance and self.actual_position_x + x < self.size_x:
                     self.actual_position_x = self.actual_position_x + 1
-                elif self.player_x_input == -1 and self.player_x < 10 and self.actual_position_x > 0:
+                elif self.player_x_input == -1 and self.player_x <  self.player_border_distance and self.actual_position_x > 0:
                     self.actual_position_x = self.actual_position_x - 1
                 else:
                     self.player_x = self.player_x + self.player_x_input
@@ -91,9 +101,9 @@ class Level1:
             
             mutex_y.acquire()
             if self.player_y + self.player_y_input > 0 and self.player_y + self.player_y_input < y - 1:
-                if self.player_y_input == 1 and self.player_y > y - 10 and self.actual_position_y + y < self.size_y:
+                if self.player_y_input == 1 and self.player_y > y -  self.player_border_distance and self.actual_position_y + y < self.size_y:
                     self.actual_position_y = self.actual_position_y + 1
-                elif self.player_y_input == -1 and self.player_y < 10 and self.actual_position_y > 0:
+                elif self.player_y_input == -1 and self.player_y <  self.player_border_distance and self.actual_position_y > 0:
                     self.actual_position_y = self.actual_position_y - 1
                 else:
                     self.player_y = self.player_y + self.player_y_input

@@ -15,3 +15,54 @@
 12:52:52 | root | DEBUG Level1: finished generate Field
 12:52:52 | root | DEBUG GameStart: render again
 12:52:52 | root | DEBUG start running
+12:59:29 | root | DEBUG MainMenu: start running
+12:59:30 | root | DEBUG MainMenu: PLAY
+12:59:30 | root | DEBUG Level1: finished generate Field
+12:59:30 | root | DEBUG GameStart: render again
+12:59:30 | root | DEBUG start running
+12:59:57 | root | DEBUG MainMenu: start running
+12:59:59 | root | DEBUG MainMenu: SETTING
+12:59:59 | root | ERROR MainMenu: Change Screen without new Screen!
+12:59:59 | root | DEBUG GameStart: render again
+12:59:59 | root | ERROR Backup: updating without a item to run!
+13:00:01 | root | DEBUG MainMenu: start running
+13:00:01 | root | DEBUG MainMenu: QUITING
+13:00:05 | root | DEBUG MainMenu: start running
+13:00:06 | root | DEBUG MainMenu: PLAY
+13:00:06 | root | DEBUG Level1: finished generate Field
+13:00:06 | root | DEBUG GameStart: render again
+13:00:06 | root | DEBUG start running
+13:02:33 | root | DEBUG MainMenu: start running
+13:02:33 | root | DEBUG MainMenu: PLAY
+13:02:33 | root | DEBUG Level1: finished generate Field
+13:02:33 | root | DEBUG GameStart: render again
+13:02:33 | root | DEBUG start running
+13:03:10 | root | DEBUG MainMenu: start running
+13:03:11 | root | DEBUG MainMenu: SETTING
+13:03:11 | root | ERROR MainMenu: Change Screen without new Screen!
+13:03:11 | root | DEBUG GameStart: render again
+13:03:11 | root | ERROR Backup: updating without a item to run!
+13:03:14 | root | DEBUG MainMenu: start running
+13:03:15 | root | DEBUG MainMenu: QUITING
+13:03:19 | root | DEBUG MainMenu: start running
+13:03:19 | root | DEBUG MainMenu: PLAY
+13:03:19 | root | DEBUG Level1: finished generate Field
+13:03:19 | root | DEBUG GameStart: render again
+13:03:19 | root | DEBUG start running
+13:04:18 | root | DEBUG MainMenu: start running
+13:04:19 | root | DEBUG MainMenu: SETTING
+13:04:19 | root | ERROR MainMenu: Change Screen without new Screen!
+13:04:19 | root | DEBUG GameStart: render again
+13:04:19 | root | ERROR Backup: updating without a item to run!
+13:04:21 | root | DEBUG MainMenu: start running
+13:04:22 | root | DEBUG MainMenu: QUITING
+13:04:25 | root | DEBUG MainMenu: start running
+13:04:26 | root | DEBUG MainMenu: PLAY
+13:04:26 | root | DEBUG Level1: finished generate Field
+13:04:26 | root | DEBUG GameStart: render again
+13:04:26 | root | DEBUG start running
+13:13:20 | root | DEBUG MainMenu: start running
+13:13:20 | root | DEBUG MainMenu: PLAY
+13:13:20 | root | DEBUG Level1: finished generate Field
+13:13:20 | root | DEBUG GameStart: render again
+13:13:20 | root | DEBUG start running
