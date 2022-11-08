@@ -78,15 +78,31 @@ class Level1:
         
         # Check if Player moved
         if renderPlayer:
-            mutex_y.acquire()
-            self.player_y = self.player_y + self.player_y_input
-            self.player_y_input = 0
-            mutex_y.release()
             mutex_x.acquire()
-            self.player_x = self.player_x + self.player_x_input
+            if self.player_x + self.player_x_input > 0 and self.player_x + self.player_x_input < x - 1:    
+                if self.player_x_input == 1 and self.player_x > x - 10 and self.actual_position_x + x < self.size_x:
+                    self.actual_position_x = self.actual_position_x + 1
+                elif self.player_x_input == -1 and self.player_x < 10 and self.actual_position_x > 0:
+                    self.actual_position_x = self.actual_position_x - 1
+                else:
+                    self.player_x = self.player_x + self.player_x_input
             self.player_x_input = 0
             mutex_x.release()
+            
+            mutex_y.acquire()
+            if self.player_y + self.player_y_input > 0 and self.player_y + self.player_y_input < y - 1:
+                if self.player_y_input == 1 and self.player_y > y - 10 and self.actual_position_y + y < self.size_y:
+                    self.actual_position_y = self.actual_position_y + 1
+                elif self.player_y_input == -1 and self.player_y < 10 and self.actual_position_y > 0:
+                    self.actual_position_y = self.actual_position_y - 1
+                else:
+                    self.player_y = self.player_y + self.player_y_input
+            self.player_y_input = 0
+            mutex_y.release()
         self.show_field[self.player_x][self.player_y] = self.player
+
+        if self.player_y > y - 10 and self.actual_position_y + y < self.size_y:
+            self.actual_position_y = self.actual_position_y + 1
 
     def _clear_field(self):
         logging.debug("cleaning")
@@ -117,13 +133,13 @@ class Level1:
 
     def run(self, screen):
         # Hotkey 'q' to exit game
-        keyboard.add_hotkey('q', exit)
+        #
+        # keyboard.add_hotkey('q', exit)
         # start player-Thread with gets input from keyboard (daemon = stop if program is terminated)
         new_thread = Thread(target=player, args=(self,), daemon=True)
         new_thread.start()
         logging.debug("start running")
         start = datetime.now()
-        start1 = datetime.now()
 
         while self.running:
             x, y = screen.getmaxyx()
@@ -132,7 +148,7 @@ class Level1:
 
             if (datetime.now() - start).total_seconds() > 0.1:
                 if self.player_x_input != 0 or self.player_y_input != 0:
-                    logging.debug("Input received: " + str(start) + ", x: " + str(self.player_x_input) + ", y: " + str(self.player_y_input) )
+                    # logging.debug("Input received: " + str(start) + ", x: " + str(self.player_x_input) + ", y: " + str(self.player_y_input) )
                     start = datetime.now()
                     self._generate_field(True)
                 else:
@@ -143,8 +159,6 @@ class Level1:
                 time.sleep(0.025)
             self.render(screen)
             screen.refresh()
-            # logging.debug("Input received: " + str(start1))
-            start1 = datetime.now()
         new_thread.join()
 
     def resize(self, screen):
@@ -165,6 +179,7 @@ class Level1:
         self.field[self.size_x - 1][0] = '╚'
         self.field[self.size_x - 1][self.size_y - 1] = '╝'
         logging.debug("Level1: finished generate Field")
+
 
 def exit():
     quit()
