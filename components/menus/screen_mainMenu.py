@@ -123,7 +123,6 @@ class Screen_MainMenu:
 
     def render(self, screen):
         size = self.term.size
-        # self._clear_field()
         for i in range(size.x):
             for j in range(size.y):
                 color = curses.color_pair(self.field_color[i][j])

@@ -157,7 +157,7 @@ class Level1:
         keyboard.on_release_key('s', lambda _:self.key_up('s'))
         keyboard.on_release_key('w', lambda _:self.key_up('w'))
 
-        keyboard.on_press_key('q', lambda _:exit())
+        keyboard.on_press_key('q', lambda _:self.changeScreen())
         keyboard.on_press_key('e', lambda _:self.attack())
 
         # new_thread = Thread(target=player, args=(self,), daemon=True)
@@ -185,7 +185,6 @@ class Level1:
                 time.sleep(0.025)
             self.render(screen)
             screen.refresh()
-        # new_thread.join()
 
     def resize(self, screen):
         self.term.size = Size.from_terminal_size(screen)
@@ -205,8 +204,6 @@ class Level1:
         self.field[self.size_x - 1][0] = '╚'
         self.field[self.size_x - 1][self.size_y - 1] = '╝'
         logging.debug("Level1: finished generate Field")
-
-    
 
     def key_down(self, key):
         match key:
@@ -232,29 +229,6 @@ class Level1:
 
     def attack(self):
         self.player_attack = 1
+
 def exit():
     quit()
-"""
-def player(lvl1):
-    while True:
-        if keyboard.is_pressed('a'):
-            mutex_y.acquire()
-            lvl1.player_y_input = -1 if lvl1.player_y_input == 0 else 0
-            mutex_y.release()
-        if keyboard.is_pressed('d'):
-            mutex_y.acquire()
-            lvl1.player_y_input = 1 if lvl1.player_y_input == 0 else 0
-            mutex_y.release()
-        if keyboard.is_pressed('w'):
-            mutex_x.acquire()
-            lvl1.player_x_input = -1 if lvl1.player_x_input == 0 else 0
-            mutex_x.release()
-        if keyboard.is_pressed('s'):
-            mutex_x.acquire()    
-            lvl1.player_x_input = 1 if lvl1.player_x_input == 0 else 0
-            mutex_x.release()
-        if keyboard.is_pressed('o'):
-            lvl1.player_attack = 1
-            lvl1.player_attack_start_position = (lvl1.player_x, lvl1.player_y)
-        time.sleep(0.001)
-"""

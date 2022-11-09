@@ -17,7 +17,7 @@ def main(screen):
 
    # for i in range(4, 255):
     #   curses.init_pair(i + 1, i, -1)
-
+    curses.curs_set(0)
     logging.basicConfig(filename='log.log',
                         filemode='a',
                         format='%(asctime)s | %(name)s | %(levelname)s %(message)s',
