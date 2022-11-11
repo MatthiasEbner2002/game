@@ -15,7 +15,7 @@ def main(screen):
     curses.init_pair(5, 4, -1)                # blue
     curses.init_pair(6, 5, -1)                # purple
 
-   # for i in range(4, 255):
+    # for i in range(4, 255):
     #   curses.init_pair(i + 1, i, -1)
     curses.curs_set(0)
     logging.basicConfig(filename='log.log',
