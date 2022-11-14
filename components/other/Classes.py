@@ -28,22 +28,21 @@ class Size:
         rows, columns = screen.getmaxyx()
         return cls(int(rows) - 1, int(columns))
 
-# TODO: make it more efficent
 def getColorIndex(x):
     return x % 6 + 1
 
-def shutdown(current_screen, screen):
-    size = copy.deepcopy(current_screen.term.size)
-    size.x = size.x - 1
-    size.y = size.y
+def shutdown(screen, show_field, field_color=None):
+    size = Size.from_terminal_size(screen)
+    show_field = copy.deepcopy(show_field)
+    if field_color == None:
+        field_color = [[-1 for i in range(size.y)] for j in range(size.x)]
     c1 = '#'
     x, y = 0, 0
     while x <= size.x - x and y <= size.y - y:
         for i in range(y, size.y - y, 1):
-            current_screen.field[x][i] = c1
-            current_screen.field_color[x][i] = getColorIndex(x)
-            #self.field[size.x - x][i] = c1
-        shutdown_render(current_screen, screen)
+            show_field[x][i] = c1
+            field_color[x][i] = getColorIndex(x)
+        shutdown_render(screen, show_field, field_color)
 
         x = x + 1
         y = y + 3
@@ -51,32 +50,28 @@ def shutdown(current_screen, screen):
     x, y = 0, 0
     while x <= size.x - x and y <= size.y - y:
         for i in range(x+1, size.x - x, 1):
-            #self.field[i][y] = c1
-            current_screen.field[i][size.y - y - 1] = c1
-            current_screen.field_color[i][size.y - y - 1] = getColorIndex(x)
+            show_field[i][size.y - y - 1] = c1
+            field_color[i][size.y - y - 1] = getColorIndex(x)
         y = y + 1
 
         for i in range(x+1, size.x - x, 1):
-            #self.field[i][y] = c1
-            current_screen.field[i][size.y - y - 1] = c1
-            current_screen.field_color[i][size.y - y - 1] = getColorIndex(x)
+            show_field[i][size.y - y - 1] = c1
+            field_color[i][size.y - y - 1] = getColorIndex(x)
         y = y + 1
 
         for i in range(x + 1, size.x - x, 1):
-            #self.field[i][y] = c1
-            current_screen.field[i][size.y - y - 1] = c1
-            current_screen.field_color[i][size.y - y - 1] = getColorIndex(x)
+            show_field[i][size.y - y - 1] = c1
+            field_color[i][size.y - y - 1] = getColorIndex(x)
         y = y + 1
         x = x + 1
-        shutdown_render(current_screen, screen)
+        shutdown_render(screen, show_field, field_color)
 
     x, y = 0, 0
     while x <= size.x - x and y <= size.y - y:
         for i in range(y, size.y - y, 1):
-            #self.field[x][i] = c1
-            current_screen.field[size.x - x][i] = c1
-            current_screen.field_color[size.x - x][i] = getColorIndex(x)
-        shutdown_render(current_screen, screen)
+            show_field[size.x - x - 1][i] = c1
+            field_color[size.x - x - 1][i] = getColorIndex(x)
+        shutdown_render(screen, show_field, field_color)
 
         x = x + 1
         y = y + 3
@@ -84,47 +79,45 @@ def shutdown(current_screen, screen):
     x, y = 0, 0
     while x <= size.x - x and y <= size.y - y:
         for i in range(x+1, size.x - x, 1):
-            current_screen.field[i][y] = c1
-            current_screen.field_color[i][y] = getColorIndex(x)
+            show_field[i][y] = c1
+            field_color[i][y] = getColorIndex(x)
         y = y + 1
 
         for i in range(x+1, size.x - x, 1):
-            current_screen.field[i][y] = c1
-            current_screen.field_color[i][y] = getColorIndex(x)
+            show_field[i][y] = c1
+            field_color[i][y] = getColorIndex(x)
         y = y + 1
 
         for i in range(x + 1, size.x - x, 1):
-            current_screen.field[i][y] = c1
-            current_screen.field_color[i][y] = getColorIndex(x)
+            show_field[i][y] = c1
+            field_color[i][y] = getColorIndex(x)
         y = y + 1
         x = x + 1
-        shutdown_render(current_screen, screen)
+        shutdown_render(screen, show_field, field_color)
     time.sleep(0.3)
     quit()
 
-def shutdown_render(self, screen):
-    render(self, screen)
+def shutdown_render(screen, show_field, field_color):
+    render(screen, show_field, field_color)
     screen.refresh()
     time.sleep(0.025)
     return
 
-def render(current_screen, screen):
-    size = current_screen.term.size
+def render(screen, show_field, field_color):
+    size = Size.from_terminal_size(screen)
     for i in range(size.x):
-        row = ''
         for j in range(size.y):
-            #row += current_screen.field[i][j]
-            color = curses.color_pair(
-                current_screen.field_color[i][j])
-            screen.addstr(
-                i, j, current_screen.field[i][j], color)
-
+            color = curses.color_pair(field_color[i][j])
+            #logging.debug(str(i) + ' ' + str(j) + ' ' + str(show_field[i][j]))
+            screen.addstr(i, j, str(show_field[i][j]), color)
 class Player:
     def __init__(self):
         self.icon = '█'
 
         self.x = 10
         self.y = 10
+        
+        self.hp = 5
 
         self.x_input = 0
         self.y_input = 0
@@ -135,6 +128,13 @@ class Player:
         self.player_attack_step1 = 0
         
         self.attack_2 = []
+        self.isAlive = True
+
+    def getHit(self, hp):
+        logging.debug("player getting hit")
+        self.hp -= hp
+        if self.hp <= 0:
+            self.isAlive = False
 
 class Attack2:
     def __init__(self, startpoint, direction_y, direction_x):
@@ -222,23 +222,32 @@ class Input:
         self.s = 0
 
 class Enemy: 
-    def __init__(self, player, y, x):
+    def __init__(self, player, size_y, size_x, position_x=None, position_y=None):
         self.player = player
         self.icon = '@'
-        self.size_x = x
-        self.size_y = y
-        self.x = random.randint(0, self.size_x)
-        self.y = random.randint(0, self.size_y)
+        self.size_x = size_x
+        self.size_y = size_y
+        self.x = position_x
+        self.y = position_y
+
+        self.die_to = ['↖','↘','↗','↙','↓', '↑','←', '→']
+
+        if self.x  == None or self.y == None:
+            self.spawnRandom()
         
         self.steps = 0
-        
+        self.isAlive = True
+
     def spawnRandom(self):
         self.y = random.randint(1, self.size_y - 1)
         self.x = random.randint(1, self.size_x - 1)
     
-    def step(self):
+    def step(self, show_field):
         if self.player.y == self.y and self.player.x == self.x:
-            self.spawnRandom()
+            self.player.getHit(1)
+            self.isAlive = False
+        if show_field[self.x][self.y] in self.die_to:
+            self.isAlive = False
         if self.steps % 15 == 0:
             self.steps = 1
             if self.player.x < self.x:
@@ -253,3 +262,38 @@ class Enemy:
 
         else:
             self.steps += 1
+
+class EnemySpawn:
+    def __init__(self, player,lvl1, y, x, position_x, position_y):
+        self.player = player
+        
+        self.lvl1 = lvl1
+
+        self.icon ='֎'
+        
+        self.size_x = x
+        self.size_y = y
+
+        self.spawn_enemys = True
+
+        self.isAlive = True
+
+        self.x = position_x
+        self.y = position_y
+        self.steps = 0
+        self.max_steps = 100
+        
+    def step(self):
+        self.steps += 1
+        if self.spawn_enemys and self.steps % self.max_steps == 0:
+            self.spawn_enemy()
+            self.steps = 0
+
+    def spawn_enemy(self):
+        ran_x = random.randint(-3, 3)
+        while ran_x == 0:
+            ran_x = random.randint(-3, 3)
+        ran_y = random.randint(-3, 3)
+        while ran_y == 0:
+            ran_y = random.randint(-3, 3)
+        self.lvl1.enemys.append(Enemy(self.player, self.size_y, self.size_x, self.x + ran_x, self.y + ran_y))

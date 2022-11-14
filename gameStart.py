@@ -25,11 +25,11 @@ def main(screen):
                         level=logging.DEBUG)
 
     term = Screen.from_terminal_size(screen)
-    term.item = Screen_MainMenu(term)
+    term.item = Screen_MainMenu(screen, term)
 
     while (True):
-        term.run(screen)
-        logging.debug("GameStart: render again")
+        term.run(screen=screen)
+        logging.info("GameStart: render again")
 
 
 if __name__ == '__main__':

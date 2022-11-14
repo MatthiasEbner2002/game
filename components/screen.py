@@ -35,7 +35,8 @@ class Screen:
 
     def run(self, screen):
         if self.item is not None:
-            self.item.run(screen)
+            #self.item.run(screen)#  for lvl1 
+            self.item.run()
         else:
             self.backup.run(screen)
 

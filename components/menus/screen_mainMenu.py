@@ -1,12 +1,14 @@
 from curses.ascii import isdigit
-from components.other.Classes import Menu, Option, shutdown, Size
+from components.other.ClassesLvl2 import Menu, Option, shutdown, Size, Player
 from components.lvl.level1 import Level1
+from components.lvl.level2 import Level2,Level_Default
 import logging
 import math
 import curses
 
 class Screen_MainMenu:
-    def __init__(self, term):
+    def __init__(self, screen, term):
+        self.screen = screen
         self.menu_size_x = 14
         self.menu_size_y = 51
         self.term = term
@@ -79,10 +81,10 @@ class Screen_MainMenu:
                                                aktiv_item.y + i] = '_'
 
     def _clear_field(self):
-        logging.debug("MainMenu: cleaning")
+        logging.info("MainMenu: cleaning")
 
-    def _move(self, screen):
-        ch = screen.getch()
+    def _move(self):
+        ch = self.screen.getch()
         if ch != -1:
             if ch == curses.KEY_LEFT or ch == 97:  # A
                 self.menu.aktiv_option = (
@@ -91,26 +93,28 @@ class Screen_MainMenu:
                 self.menu.aktiv_option = (
                     self.menu.aktiv_option + 1) % self.menu.anzahl_options
             elif ch == 10:  # ENTER
-                self._enter(self.menu.aktiv_option, screen)
+                self._enter(self.menu.aktiv_option)
             elif ch == 112:  # P
-                self._enter(0, screen)
+                self._enter(0)
             elif ch == 115:  # S
-                self._enter(1, screen)
+                self._enter(1)
             elif ch == 113:  # Q
-                self._enter(2, screen)
+                self._enter(2)
         return
 
-    def _enter(self, option, screen):
+    def _enter(self, option):
         if option == 0:
-            logging.debug("MainMenu: PLAY")
-            lvl = Level1(self.term)
+            logging.info("MainMenu: PLAY")
+            #lvl = Level1(self.term)
+            player = Player()
+            lvl = Level_Default.from_txt(term=self.term,screen=self.screen, player=player, path="C:\\Users\\matth\\MyGits\\game\\components\\lvl\\level2.txt")
             self.changeScreen(lvl)
         elif option == 1:
-            logging.debug("MainMenu: SETTING")
+            logging.info("MainMenu: SETTING")
             self.changeScreen(None)
         elif option == 2:
-            logging.debug("MainMenu: QUITING")
-            shutdown(self, screen)
+            logging.info("MainMenu: QUITING")
+            shutdown(self.screen, self.field, self.field_color)
 
     def changeScreen(self, option):
         if(option != None):
@@ -121,26 +125,26 @@ class Screen_MainMenu:
             self.term.item = None
             self.running = False
 
-    def render(self, screen):
+    def render(self):
         size = self.term.size
         for i in range(size.x):
             for j in range(size.y):
                 color = curses.color_pair(self.field_color[i][j])
-                screen.addstr(i, j, self.field[i][j], color)
+                self.screen.addstr(i, j, self.field[i][j], color)
 
-    def run(self, screen):
-        logging.debug("MainMenu: start running")
+    def run(self):
+        logging.info("MainMenu: start running")
         while self.running:
-            x, y = screen.getmaxyx()
+            x, y = self.screen.getmaxyx()
             if self.term.size.x - 1 != x or self.term.size.y != y:
-                self.resize(screen)
+                self.resize()
             self._generate_field()
-            self.render(screen)
-            screen.refresh()
-            self._move(screen)
+            self.render()
+            self.screen.refresh()
+            self._move()
 
-    def resize(self, screen):
-        self.term.size = Size.from_terminal_size(screen)
+    def resize(self, ):
+        self.term.size = Size.from_terminal_size(self.screen)
         self.field = [['.' for i in range(self.term.size.y)]
                       for j in range(self.term.size.x)]
         self.field_color = [[-1 for i in range(self.term.size.y)]

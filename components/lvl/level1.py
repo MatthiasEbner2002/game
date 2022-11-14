@@ -1,8 +1,7 @@
 from datetime import datetime
-from datetime import datetime
 from distutils.log import debug
 import time
-from components.other.Classes import shutdown, Size, Attack2, Input, Player, Enemy
+from components.other.Classes import shutdown, Size, Attack2, Input, Player, Enemy, EnemySpawn
 import logging
 import curses
 import keyboard
@@ -12,8 +11,8 @@ mutex_x = Lock()
 mutex_y = Lock()
 class Level1:
     def __init__(self, term):
-        self.size_x = 150
-        self.size_y = 250
+        self.size_x = 100
+        self.size_y = 100
 
         self.actual_position_x = 0
         self.actual_position_y = 0
@@ -29,8 +28,9 @@ class Level1:
         
         self.attack_2 = []
         self.enemys = []
-        self.enemys.append(Enemy(self.player, self.size_y, self.size_x))
-        self.enemys.append(Enemy(self.player, self.size_y, self.size_x))
+
+        self.spawn_enemy = []
+        self.spawn_enemy.append(EnemySpawn(self.player, self, self.size_y, self.size_x, 20, 20))
 
         self.running = True
         self.field = None
@@ -38,9 +38,10 @@ class Level1:
         self.setStartField()
         self.show_field = [[' ' for i in range(self.size_y + 1 if self.size_y + 1 > self.term.size.y else self.term.size.y)]
                            for j in range(self.size_x + 1 if self.size_x + 1 > self.term.size.x else self.term.size.x)]
-        self._generate_field(True)
 
-    def _generate_field(self, renderPlayer):
+    def _generate_field(self, renderPlayer, screen):
+        self.show_field = [[' ' for i in range(self.size_y + 1 if self.size_y + 1 > self.term.size.y else self.term.size.y)]
+                           for j in range(self.size_x + 1 if self.size_x + 1 > self.term.size.x else self.term.size.x)]
         # Get x-size to render
         x = self.size_x if self.term.size.x >= self.size_x else self.term.size.x 
         # Get y-size to render
@@ -49,12 +50,7 @@ class Level1:
         for i in range(0, self.size_x):
             for j in range(0, self.size_y):
                 self.show_field[i][j] = self.field[i][j]
-        """
-        # add entire field
-        for i in range(self.actual_position_x, self.actual_position_x + x):
-            for j in range(self.actual_position_y,self.actual_position_y + y):
-                self.show_field[i][j] = self.field[i][j]
-        """
+
         if self.player_attack1 == 1:
             self.player_attack_step1 += 1
             if self.player_attack_step1 > 20:
@@ -97,12 +93,21 @@ class Level1:
                     attack2.addAnimationTo_show_field(self.show_field)
 
         for enemy in self.enemys:
-            enemy.step()
-            self.show_field[enemy.x][enemy.y] = enemy.icon
+            if enemy.isAlive:
+                enemy.step(self.show_field)
+                self.show_field[enemy.x][enemy.y] = enemy.icon
+            else:
+                self.enemys.remove(enemy)
+
+        for spawn_enemy in self.spawn_enemy:
+            if spawn_enemy.isAlive:
+                spawn_enemy.step()
+                self.show_field[spawn_enemy.x][spawn_enemy.y] = spawn_enemy.icon
+            else:
+                self.enemys.remove(enemy)
 
         # Check if Player moved
         if renderPlayer:
-            # logging.debug("player is moving" + str(datetime.now()))
             mutex_x.acquire()
             if self.player.x + self.player.x_input > 0 and self.player.x + self.player.x_input < self.actual_position_x + x - 1:    
                 if self.player.x_input == 1 and self.player.x > self.actual_position_x + x -  self.player.border_distance and self.actual_position_x + x < self.size_x:
@@ -123,6 +128,8 @@ class Level1:
             self.player.y_input = 0
             mutex_y.release()
         self.show_field[self.player.x][self.player.y] = self.player.icon
+        if not self.player.isAlive:
+             shutdown(screen, self.getCurrentScreen())
         self.addInfos()
 
     def _clear_field(self, screen):
@@ -133,25 +140,14 @@ class Level1:
                 screen.addstr(i, j, self.show_field[i][j], color)
         return
 
-    def _enter(self, option, screen):
-        if option == 0:
-            logging.debug("PLAY")
-            self.changeScreen()
-        elif option == 1:
-            logging.debug("SETTING")
-            self.changeScreen()
-        elif option == 2:
-            logging.debug("QUITING")
-            shutdown(self, screen)
-
-    def changeScreen(self):
-        self.term.item = None
+    def changeScreen(self, newItem=None):
+        self.term.item = newItem
         self.running = False
 
     def render(self, screen):
         size = self.term.size
-        y = self.size_y if size.y >= self.size_y else size.y
-        x = self.size_x if size.x >= self.size_x else size.x
+        y = size.y
+        x = size.x
         for i in range(0, x):
             for j in range(0, y):
                 color = curses.color_pair(-1)
@@ -192,20 +188,18 @@ class Level1:
                 # if player moved generate player
                 if self.player.x_input != 0 or self.player.y_input != 0:
                     start = datetime.now()
-                    self._generate_field(True)
+                    self._generate_field(True, screen)
                 else:
-                    self._generate_field(False)
+                    self._generate_field(False, screen)
                     time.sleep(0.025)
             else:
-                self._generate_field(False)
+                self._generate_field(False, screen)
                 time.sleep(0.025)
             self.render(screen)
             screen.refresh()
 
     def resize(self, screen):
         self.term.size = Size.from_terminal_size(screen)
-        # self.show_field = [[' ' for i in range(self.term.size.y)]
-        #                    for j in range(self.term.size.x)]
 
     def setStartField(self):
         self.field = [[' ' for i in range(self.size_y)]
@@ -252,9 +246,20 @@ class Level1:
             self.attack_2.append(attack)
 
     def addInfos(self):
-        infos_size_x = 10
-        infos_size_y = 30
         size = self.term.size
+
+        infos_size_x = 5
+        infos_size_y = 30
+        hpText = "HP: "
+        for i in range(self.player.hp):
+            hpText += '♥'
+        for i in range(5 - self.player.hp):
+            hpText += '♡'
+        positionLineOne = self.actual_position_x + size.x - infos_size_x
+
+        for i in range(3, 3 + len(hpText)):
+            self.show_field[positionLineOne][i] = hpText[i - 3]
+
         for i in range(size.x - infos_size_x, size.x - 2):
             self.show_field[self.actual_position_x + i][self.actual_position_y + 2] = '║'
             self.show_field[self.actual_position_x + i][self.actual_position_y + infos_size_y + 2] = '║'
@@ -268,5 +273,14 @@ class Level1:
         self.show_field[self.actual_position_x + size.x - 2][self.actual_position_y + 2] = '╚'
         self.show_field[self.actual_position_x + size.x - infos_size_x - 1][self.actual_position_y + 2] = '╔'
 
+    def getCurrentScreen(self):
+        size = self.term.size
+        y = size.y
+        x = size.x
+        ret = [[' ' for i in range(y)] for j in range(x)]
+        for i in range(0, x):
+            for j in range(0, y):
+                ret[i][j] = self.show_field[self.actual_position_x + i][self.actual_position_y + j]
+        return ret
 def exit():
     quit()
