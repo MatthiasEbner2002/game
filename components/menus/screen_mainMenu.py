@@ -1,7 +1,7 @@
 from curses.ascii import isdigit
-from components.other.ClassesLvl2 import Menu, Option, shutdown, Size, Player
+from components.other.ClassesDefault import Menu, Option, shutdown, Size, Player
 from components.lvl.level1 import Level1
-from components.lvl.level2 import Level2,Level_Default
+from components.lvl.level2 import Level_Default
 import logging
 import math
 import curses

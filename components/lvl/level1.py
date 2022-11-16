@@ -282,5 +282,6 @@ class Level1:
             for j in range(0, y):
                 ret[i][j] = self.show_field[self.actual_position_x + i][self.actual_position_y + j]
         return ret
+
 def exit():
     quit()

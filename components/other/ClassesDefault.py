@@ -5,6 +5,8 @@ import curses
 import logging
 import keyboard
 import random
+from myLogger import debug, info, error, logLines
+
 
 
 class Menu:
@@ -118,7 +120,8 @@ class Player:
         self.x = 10 if start_position_x == None else start_position_x
         self.y = 10 if start_position_y == None else start_position_y
         self.icon = '█'
-        self.hp = 5
+        self.max_hp = 10
+        self.hp = self.max_hp
         self.x_input = 0
         self.y_input = 0
         self.border_distance = 8
@@ -190,7 +193,6 @@ class Player:
         for attack in self.attacks:
             attack.step(self.attacks, blank_field, field)
 
-
 class Attack2:
     def __init__(self, startpoint, direction_y, direction_x):
         self.maxSteps = 50
@@ -243,6 +245,8 @@ class Attack2:
     def hasNext(self, blank_field):
         if blank_field[self.start_point[1] + self.direction_x * ((self.steps + 1) // 2)][self.start_point[0] + self.direction_y * (self.steps + 1)] != ' ':
             return False 
+        if self.steps >= self.maxSteps:
+            return False
         return True
     
     def step(self, attacks, blank_field, field):
@@ -284,16 +288,16 @@ class Input:
         self.s = 0
 
 class Enemy: 
-    def __init__(self, player, size_y, size_x, position_x=None, position_y=None):
+    def __init__(self, player, size_y, size_x, position_x=None, position_y=None, field=None):
         self.player = player
         self.icon = '@'
         self.size_x = size_x
         self.size_y = size_y
         self.x = position_x
         self.y = position_y
+        self.field = field
 
         self.die_to = ['↖','↘','↗','↙','↓', '↑','←', '→']
-
         if self.x  == None or self.y == None:
             self.spawnRandom()
         
@@ -304,11 +308,11 @@ class Enemy:
         self.y = random.randint(1, self.size_y - 1)
         self.x = random.randint(1, self.size_x - 1)
     
-    def step(self, show_field):
+    def step(self, field):
         if self.player.y == self.y and self.player.x == self.x:
             self.player.getHit(1)
             self.isAlive = False
-        if show_field[self.x][self.y] in self.die_to:
+        if field[self.x][self.y] in self.die_to:
             self.isAlive = False
         if self.steps % 15 == 0:
             self.steps = 1
@@ -325,8 +329,10 @@ class Enemy:
         else:
             self.steps += 1
 
+
 class EnemySpawn:
-    def __init__(self, player,lvl1, y, x, position_x, position_y):
+    countEnemy = 1
+    def __init__(self, player, lvl1, y, x, position_x, position_y):
         self.player = player
         
         self.lvl1 = lvl1
@@ -345,11 +351,13 @@ class EnemySpawn:
         self.steps = 0
         self.max_steps = 100
         
-    def step(self):
+    def step(self, field):
         self.steps += 1
         if self.spawn_enemys and self.steps % self.max_steps == 0:
+            logging.debug("spawn enemy")
             self.spawn_enemy()
             self.steps = 0
+        #self.lvl1.field[self.x][self.y] = self.icon
 
     def spawn_enemy(self):
         ran_x = random.randint(-3, 3)
@@ -358,4 +366,5 @@ class EnemySpawn:
         ran_y = random.randint(-3, 3)
         while ran_y == 0:
             ran_y = random.randint(-3, 3)
-        self.lvl1.enemys.append(Enemy(self.player, self.size_y, self.size_x, self.x + ran_x, self.y + ran_y))
+        self.countEnemy += 1
+        self.lvl1.enemys.append(Enemy(self.player, self.size_y, self.size_x, self.x + ran_x, self.y + ran_y, self.lvl1.field))
