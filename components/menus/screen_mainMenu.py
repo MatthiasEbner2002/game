@@ -1,10 +1,11 @@
 from curses.ascii import isdigit
 from components.other.ClassesDefault import Menu, Option, shutdown, Size, Player
-from components.lvl.level1 import Level1
+# from components.lvl.level1 import Level1
 from components.lvl.level2 import Level_Default
 import logging
 import math
 import curses
+
 
 class Screen_MainMenu:
     def __init__(self, screen, term):
@@ -55,7 +56,9 @@ class Screen_MainMenu:
 
         for i in range(self.menu_size_x):
             for j in range(self.menu_size_y):
-                if isdigit(self.item_color_raw[i][j]) and int(self.item_color_raw[i][j]) <= 6 and int(self.item_color_raw[i][j]) >= 1:
+                if isdigit(self.item_color_raw[i][j]) and int(self.item_color_raw[i][j]) <= 6 and \
+                    int(self.item_color_raw[i][j]) >= 1:
+
                     self.item_color[i][j] = self.item_color_raw[i][j]
 
         self.menu = Menu([
@@ -107,7 +110,8 @@ class Screen_MainMenu:
             logging.info("MainMenu: PLAY")
             #lvl = Level1(self.term)
             player = Player()
-            lvl = Level_Default.from_txt(term=self.term,screen=self.screen, player=player, path="C:\\Users\\matth\\MyGits\\game\\components\\lvl\\level2.txt")
+            lvl = Level_Default.from_txt(term=self.term, screen=self.screen, player=player,
+                                         path="C:\\Users\\matth\\MyGits\\game\\components\\lvl\\level2.txt")
             self.changeScreen(lvl)
         elif option == 1:
             logging.info("MainMenu: SETTING")
@@ -117,7 +121,7 @@ class Screen_MainMenu:
             shutdown(self.screen, self.field, self.field_color)
 
     def changeScreen(self, option):
-        if(option != None):
+        if (option != None):
             self.term.item = option
             self.running = False
         else:

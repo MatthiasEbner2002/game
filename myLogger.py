@@ -1,18 +1,24 @@
 import logging
-#global LineCount
 LineCount = 1
 logLines = []
+
+
 def debug(text):
-    logLines.append(" " + str(LineCount) + ": " + text)
-    #LineCount  += 1
+    global LineCount
+    logLines.append("DEBUG(" + str(LineCount) + "): " + text)
+    LineCount += 1
     logging.debug(text)
 
+
 def info(text):
-    logLines.append(" " + str(LineCount) + ": " + text)
-    #LineCount  += 1
+    global LineCount
+    logLines.append("INFO (" + str(LineCount) + "): " + text)
+    LineCount += 1
     logging.info(text)
 
+
 def error(text):
-    logLines.append(" " + str(LineCount) + ": " + text)
-    #LineCount += 1
+    global LineCount
+    logLines.append("ERROR(" + str(LineCount) + "): " + text)
+    LineCount += 1
     logging.error(text)

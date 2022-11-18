@@ -35,10 +35,11 @@ class Screen:
 
     def run(self, screen):
         if self.item is not None:
-            #self.item.run(screen)#  for lvl1 
+            # self.item.run(screen)#  for lvl1
             self.item.run()
         else:
             self.backup.run(screen)
+
 
 class Backup:
     def __init__(self, size):
@@ -62,4 +63,4 @@ class Backup:
         self.render(screen)
         screen.refresh()
         screen.getch()
-        quit();
+        quit()
