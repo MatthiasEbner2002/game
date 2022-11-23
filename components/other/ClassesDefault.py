@@ -4,6 +4,11 @@ import curses
 import logging
 import keyboard
 import random
+from myLogger import info, debug, error
+#import components.other.AStar as AStar
+from datetime import datetime
+from astar.search import AStar
+
 
 
 class Menu:
@@ -138,10 +143,11 @@ class Player:
         self.addAttack2()
 
     def getHit(self, hp):
-        logging.debug("player getting hit")
         self.hp -= hp
+        info("player got hit! for " + str(hp) + " hp ( " + str(self.hp) + "/" + str(self.max_hp) + "left )")
         if self.hp <= 0:
             self.isAlive = False
+            info("Player dead!")
 
     def addMovement(self):
         keyboard.on_press_key('a', lambda _: self.keyDown('a'))
@@ -299,7 +305,7 @@ class Input:
 
 
 class Enemy:
-    def __init__(self, player, size_y, size_x, position_x=None, position_y=None, field=None):
+    def __init__(self, player, size_y, size_x, position_x=None, position_y=None, field=None, borders=None):
         self.player = player
         self.icon = '@'
         self.size_x = size_x
@@ -307,6 +313,7 @@ class Enemy:
         self.x = position_x
         self.y = position_y
         self.field = field
+        self.borders = borders
 
         self.die_to = ['↖', '↘', '↗', '↙', '↓', '↑', '←', '→']
         if self.x is None or self.y is None:
@@ -326,7 +333,18 @@ class Enemy:
         if field[self.x][self.y] in self.die_to:
             self.isAlive = False
         if self.steps % 15 == 0:
+            # error("AStar: " + str(hash(self)) + " | Start")
+            time = datetime.now()
+            path = AStar(self.borders).search((self.x, self.y), (self.player.x, self.player.y))
+            # error("AStar: " + str(hash(self)) + " | End")
+            error(str(( datetime.now() - time).total_seconds()))
+            if len(path) >= 1:
+                next_step = path[1]
+            else:
+                next_step = path[0]
+            # debug(str(next_step))
             self.steps = 1
+            """
             if self.player.x < self.x:
                 self.x -= 1
             elif self.player.x > self.x:
@@ -336,7 +354,9 @@ class Enemy:
                 self.y -= 1
             elif self.player.y > self.y:
                 self.y += 1
-
+            """
+            self.x = next_step[0]
+            self.y = next_step[1]
         else:
             self.steps += 1
 
@@ -361,7 +381,7 @@ class EnemySpawn:
         self.x = position_x
         self.y = position_y
         self.steps = 0
-        self.max_steps = 100
+        self.max_steps = 300
 
     def step(self, field):
         self.steps += 1
@@ -385,5 +405,6 @@ class EnemySpawn:
                 self.size_x,
                 self.x + ran_x,
                 self.y + ran_y,
-                self.lvl1.field)
+                self.lvl1.field,
+                self.lvl1.Field01)
         )

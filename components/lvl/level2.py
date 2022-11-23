@@ -12,11 +12,13 @@ mutex_y = Lock()
 
 class Level_Default:
     def __init__(self, term, screen, player=None, blank_field=None) -> None:
-        self.menu_size_x = 10
-        self.menu_size_at_the_moment = 10
+        self.menu_size_x = 9
+        self.menu_size_at_the_moment = self.menu_size_x
         self.menu_is_open = True
         self.menu_is_opening = False
         self.menu_is_closing = False
+
+        self.showLogs = False
 
         self.term = term
         self.size_x = 100
@@ -24,6 +26,7 @@ class Level_Default:
         if blank_field is not None:
             self.size_y = len(blank_field[0]) - 1
             self.size_x = len(blank_field)
+
         self.actual_position_x = 0
         self.actual_position_y = 0
         self.player = player
@@ -38,9 +41,11 @@ class Level_Default:
         self.blank_field = blank_field
         if self.blank_field is None:
             self.blank_field = self._getStartField()
+        self.Field01 = self._get01Field(self.blank_field)
         self.field = [[' ' for i in range(self.size_y + 1 if self.size_y + 1 > self.terminal_size.y else self.terminal_size.y)]
                       for j in range(self.size_x + 1 if self.size_x + 1 > self.terminal_size_real_x else self.terminal_size_real_x)]
         self._addCloseFunction()
+        self._addLoggingFunction()
         self._addOpenMenuFunction()
 
     @classmethod
@@ -128,6 +133,7 @@ class Level_Default:
             time.sleep(0.025)
 
     def _render(self):
+        self.screen.clear()
         color = curses.color_pair(-1)
         size = Size.from_terminal_size(self.screen)
 
@@ -169,21 +175,40 @@ class Level_Default:
             for i in range(self.menu_size_at_the_moment):
                 for j in range(30):
                     self.screen.addstr(i + size.x, j, Infos[i][j], color)
+            if not self.showLogs:
+                Log = self.addLogs()
+                for i in range(self.menu_size_at_the_moment):
+                    for j in range(self.terminal_size.y - 30):
+                        self.screen.addstr(i + size.x, j + 30, Log[i][j], color)
+            else:
+                Inv = self.addInventory()
+                for i in range(self.menu_size_at_the_moment):
+                    for j in range(self.terminal_size.y - 30):
+                        self.screen.addstr(i + size.x, j + 30, Inv[i][j], color)
+        else:
+            hpText = self.getHpText()
+            self.screen.addstr(self.terminal_size_real_x - 3, 0, '╠', color)
+            for i in range(1, len(hpText) + 1):
+                self.screen.addstr(self.terminal_size_real_x - 3, i, '═', color)
+                self.screen.addstr(self.terminal_size_real_x - 2, i, hpText[i - 1], color)
 
-            Log = self.addLogs()
-            for i in range(self.menu_size_at_the_moment):
-                for j in range(self.terminal_size.y - 30):
-                    self.screen.addstr(i + size.x, j + 30, Log[i][j], color)
-            self.addLogs()
+            self.screen.addstr(self.terminal_size_real_x - 3, len(hpText) + 1, '╗', color)
+            self.screen.addstr(self.terminal_size_real_x - 2, len(hpText) + 1, '║', color)
+            self.screen.addstr(self.terminal_size_real_x - 1, len(hpText) + 1, '╩', color)
 
     def _addCloseFunction(self):
         keyboard.on_press_key('q', lambda _: self._changeScreen())
+
+    def _addLoggingFunction(self):
+        keyboard.on_press_key('l', lambda _: self._toggleLogs())
+
+    def _toggleLogs(self):
+        self.showLogs = not self.showLogs
 
     def _addOpenMenuFunction(self):
         keyboard.on_press_key('m', lambda _: self._triggerMenu())
 
     def _triggerMenu(self):
-
         if self.menu_is_closing is not True and self.menu_is_opening is not True:
             if self.menu_is_open is True:
                 self.menu_is_closing = True
@@ -194,6 +219,7 @@ class Level_Default:
             self.menu_is_open = not self.menu_is_open
 
     def _changeScreen(self, newItem=None):
+        curses.flushinp()
         logging.info("Change screen!")
         self.term.item = newItem
         self.running = False
@@ -249,13 +275,7 @@ class Level_Default:
         infos_size_y = 30
         Infos = [[' ' for i in range(infos_size_y + 1)]
                  for j in range(infos_size_x + 1)]
-        hpText = "HP:"
-        for i in range(self.player.hp // 2):
-            hpText += '♥'
-        if self.player.hp % 2 == 1:
-            hpText += '½'
-        for i in range((self.player.max_hp - self.player.hp) // 2):
-            hpText += '♡'
+        hpText = self.getHpText()
         positionLineOne = 2
 
         for i in range(2, 2 + len(hpText)):
@@ -275,46 +295,22 @@ class Level_Default:
         Infos[0][0] = '╔'
         return Infos
 
+    def getHpText(self):
+        hpText = "HP:"
+        for i in range(self.player.hp // 2):
+            hpText += '♥'
+        if self.player.hp % 2 == 1:
+            hpText += '½'
+        for i in range((self.player.max_hp - self.player.hp) // 2):
+            hpText += '♡'
+        return hpText
+
     def addLogs(self):
-        amountLines = 8
+        amountLines = self.menu_size_x - 2
         log_size_x = self.menu_size_x
         infos_size_y = 30
         log_size_y = self.terminal_size.y - (infos_size_y)
-        log = [[' ' for i in range(log_size_y + 1)]
-               for j in range(log_size_x + 1)]
-
-        lines = amountLines if amountLines < len(logLines) else len(logLines)
-        # logging.error(lines)
-        res = logLines[-lines:]
-        # logging.error(res)
-
-        for i in range(lines):
-            # logging.info(res[i])
-            for j in range(log_size_y - 1 if log_size_y - 1 < len(res[i]) else len(res[i])):
-                log[i + 1][j + 1] = res[i][j]
-
-        for i in range(0, log_size_x):
-            log[i][0] = '║'
-            log[i][log_size_y - 1] = '║'
-
-        for i in range(0, log_size_y - 1):
-            log[0][i] = '═'
-            log[log_size_x - 1][i] = '═'
-
-        log[0][log_size_y - 1] = '╗'
-        log[log_size_x - 1][log_size_y - 1] = '╝'
-        log[log_size_x - 1][0] = '╚'
-        log[0][0] = '╔'
-        return log
-
-    def addInventory(self):
-        # InventoryCout = 10
-        amountLines = 8
-        log_size_x = self.menu_size_x
-        infos_size_y = 30
-        log_size_y = self.terminal_size.y - (infos_size_y)
-        log = [[' ' for i in range(log_size_y + 1)]
-               for j in range(log_size_x + 1)]
+        log = self.getArrayWithBorder(log_size_x, log_size_y)
 
         lines = amountLines if amountLines < len(logLines) else len(logLines)
         res = logLines[-lines:]
@@ -323,16 +319,69 @@ class Level_Default:
             for j in range(log_size_y - 1 if log_size_y - 1 < len(res[i]) else len(res[i])):
                 log[i + 1][j + 1] = res[i][j]
 
-        for i in range(0, log_size_x):
-            log[i][0] = '║'
-            log[i][log_size_y - 1] = '║'
-
-        for i in range(0, log_size_y - 1):
-            log[0][i] = '═'
-            log[log_size_x - 1][i] = '═'
-
-        log[0][log_size_y - 1] = '╗'
-        log[log_size_x - 1][log_size_y - 1] = '╝'
-        log[log_size_x - 1][0] = '╚'
-        log[0][0] = '╔'
         return log
+
+    def addInventory(self, rows=2, columns=4, width_y=10, height_x=2):
+        quit()
+        origin = Size(1, 2)
+        inventory_x = self.menu_size_x
+        infos_size_y = 30
+        inventory_y = self.terminal_size.y - (infos_size_y)
+        inv = self.getArrayWithBorder(inventory_x, inventory_y)
+        for i in range(0, columns * width_y + columns + 1, width_y + 1):
+            for j in range(0, rows * height_x + rows + 1):
+                inv[j + origin.x][i + origin.y] = '│'
+
+        for j in range(0, rows * height_x + rows + 1, height_x + 1):
+            for i in range(0, columns * width_y + columns + 1):
+                icon = '─'
+                if i % (width_y + 1) == 0:
+                    if j == 0:
+                        icon = '┬'
+                    elif j == rows * height_x + rows:
+                        icon = '┴'
+                    elif i == 0:
+                        icon = '├'
+                    elif i == columns * width_y + columns:
+                        icon = '┤'
+                    else:
+                        icon = '┼'
+
+                # icon  = ""
+                inv[j + origin.x][i + origin.y] = icon
+
+        inv[origin.x][origin.y] = '┌'
+        inv[origin.x][(columns * width_y + columns) + origin.y] = '┐'
+        inv[(rows * height_x + rows) + origin.x][origin.y] = '└'
+        inv[(rows * height_x + rows) + origin.x][(columns * width_y + columns) + origin.y] = '┘'
+
+        return inv
+
+    def getArrayWithBorder(self, x, y):
+        ret = [[' ' for i in range(y + 1)]
+               for j in range(x + 1)]
+
+        for i in range(0, x):
+            ret[i][0] = '║'
+            ret[i][y - 1] = '║'
+
+        for i in range(0, y - 1):
+            ret[0][i] = '═'
+            ret[x - 1][i] = '═'
+
+        ret[0][y - 1] = '╗'
+        ret[x - 1][y - 1] = '╝'
+        ret[x - 1][0] = '╚'
+        ret[0][0] = '╔'
+
+        return ret
+
+    def _get01Field(self, blank_field):
+        size_y = len(blank_field[0]) - 1
+        size_x = len(blank_field)
+        ret = [ [0] * size_y for _ in range(size_x)]
+        for i in range(size_x):
+            for j in range(size_y):
+                if blank_field[i][j] != ' ':
+                    ret[i][j] = 1
+        return ret

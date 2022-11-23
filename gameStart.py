@@ -5,6 +5,7 @@ from components.menus.screen_mainMenu import Screen_MainMenu
 
 
 def main(screen):
+    curses.noecho()
     curses.initscr()
     curses.start_color()
     curses.use_default_colors()
@@ -26,7 +27,6 @@ def main(screen):
 
     term = Screen.from_terminal_size(screen)
     term.item = Screen_MainMenu(screen, term)
-
     while (True):
         term.run(screen=screen)
         logging.info("GameStart: render again")
@@ -34,3 +34,4 @@ def main(screen):
 
 if __name__ == '__main__':
     curses.wrapper(main)
+
