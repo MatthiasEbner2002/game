@@ -322,7 +322,6 @@ class Level_Default:
         return log
 
     def addInventory(self, rows=2, columns=4, width_y=10, height_x=2):
-        quit()
         origin = Size(1, 2)
         inventory_x = self.menu_size_x
         infos_size_y = 30

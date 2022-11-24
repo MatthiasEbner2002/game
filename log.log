@@ -526,3 +526,663 @@
 14:53:23 | root | DEBUG size_y: 201
 14:53:23 | root | INFO GameStart: render again
 14:53:23 | root | INFO Level2 | start run
+22:09:37 | root | INFO MainMenu: start running
+22:09:47 | root | INFO MainMenu: PLAY
+22:09:47 | root | INFO Player created!
+22:09:47 | root | DEBUG add Player movement
+22:09:47 | root | DEBUG size_x: 73
+22:09:47 | root | DEBUG size_y: 201
+22:09:47 | root | INFO GameStart: render again
+22:09:47 | root | INFO Level2 | start run
+22:09:59 | root | DEBUG spawn enemy
+22:09:59 | root | ERROR 0.00802
+22:10:00 | root | ERROR 0.0
+22:10:00 | root | DEBUG Start Closing Menu
+22:10:01 | root | ERROR 0.005037
+22:10:01 | root | DEBUG Start Opening Menu
+22:10:01 | root | ERROR 0.007988
+22:10:02 | root | ERROR 0.008013
+22:10:03 | root | ERROR 0.007523
+22:10:03 | root | ERROR 0.007776
+22:10:04 | root | ERROR 0.0
+22:10:12 | root | INFO MainMenu: start running
+22:10:13 | root | INFO MainMenu: QUITING
+01:33:49 | root | INFO MainMenu: start running
+01:33:52 | root | INFO MainMenu: PLAY
+01:33:52 | root | INFO Player created!
+01:33:52 | root | DEBUG add Player movement
+01:33:52 | root | DEBUG size_x: 73
+01:33:52 | root | DEBUG size_y: 201
+01:33:52 | root | INFO GameStart: render again
+01:33:52 | root | INFO Level2 | start run
+01:33:54 | root | DEBUG Start Closing Menu
+01:33:55 | root | DEBUG Start Opening Menu
+01:34:05 | root | DEBUG spawn enemy
+01:34:05 | root | ERROR 0.015249
+01:34:06 | root | ERROR 0.002058
+01:34:06 | root | ERROR 0.0
+01:34:07 | root | ERROR 0.006976
+01:34:07 | root | ERROR 0.004072
+01:34:08 | root | ERROR 0.008
+01:34:09 | root | ERROR 0.016033
+01:34:09 | root | ERROR 0.007998
+01:34:10 | root | ERROR 0.008084
+01:34:11 | root | ERROR 0.008216
+01:34:11 | root | ERROR 0.01176
+01:34:12 | root | ERROR 0.010065
+01:34:13 | root | ERROR 0.019824
+01:34:13 | root | ERROR 0.033042
+01:34:14 | root | ERROR 0.047447
+01:34:15 | root | ERROR 0.093739
+01:34:15 | root | ERROR 0.102398
+01:34:16 | root | ERROR 0.152326
+01:34:17 | root | ERROR 0.176082
+01:34:18 | root | ERROR 0.201081
+01:34:18 | root | DEBUG spawn enemy
+01:34:19 | root | ERROR 0.226322
+01:34:19 | root | ERROR 0.188401
+01:34:20 | root | ERROR 0.256295
+01:34:20 | root | ERROR 0.226936
+01:34:21 | root | ERROR 0.27095
+01:34:21 | root | ERROR 0.261364
+01:34:22 | root | ERROR 0.295392
+01:34:22 | root | ERROR 0.298186
+01:34:23 | root | ERROR 0.341641
+01:34:23 | root | ERROR 0.289478
+01:34:24 | root | ERROR 0.340023
+01:34:25 | root | ERROR 0.330674
+01:34:26 | root | ERROR 0.361679
+01:34:26 | root | ERROR 0.361672
+01:34:27 | root | ERROR 0.373272
+01:34:28 | root | ERROR 0.373284
+01:34:29 | root | ERROR 0.393728
+01:34:29 | root | ERROR 0.401986
+01:34:30 | root | ERROR 0.417161
+01:34:30 | root | ERROR 0.431882
+01:34:31 | root | ERROR 0.401051
+01:34:32 | root | ERROR 0.38905
+01:34:33 | root | ERROR 0.44893
+01:34:33 | root | ERROR 0.384353
+01:34:34 | root | ERROR 0.449511
+01:34:35 | root | ERROR 0.462149
+01:34:36 | root | ERROR 0.486509
+01:34:36 | root | ERROR 0.480407
+01:34:37 | root | ERROR 0.491495
+01:34:38 | root | ERROR 0.485446
+01:34:39 | root | ERROR 0.515407
+01:34:40 | root | ERROR 0.540296
+01:34:41 | root | ERROR 0.62361
+01:34:41 | root | ERROR 0.48765
+01:34:42 | root | INFO Change screen!
+01:34:42 | root | ERROR 0.537444
+01:34:43 | root | ERROR 0.590545
+01:34:43 | root | INFO Change screen!
+01:34:43 | root | INFO GameStart: render again
+01:34:43 | root | ERROR Backup: updating without a item to run!
+15:52:56 | root | INFO MainMenu: start running
+15:52:56 | root | INFO MainMenu: PLAY
+15:52:56 | root | INFO Player created!
+15:52:56 | root | DEBUG add Player movement
+15:52:56 | root | DEBUG size_x: 73
+15:52:56 | root | DEBUG size_y: 201
+15:52:56 | root | INFO GameStart: render again
+15:52:56 | root | INFO Level2 | start run
+15:53:08 | root | DEBUG spawn enemy
+15:53:08 | root | ERROR 0.015585
+15:53:09 | root | ERROR 0.033464
+15:53:10 | root | ERROR 0.031755
+15:53:10 | root | ERROR 0.03793
+15:53:11 | root | ERROR 0.029288
+15:53:12 | root | ERROR 0.022739
+15:53:13 | root | ERROR 0.015656
+15:53:13 | root | ERROR 0.010459
+15:53:14 | root | ERROR 0.003227
+15:53:15 | root | ERROR 0.014843
+15:53:15 | root | ERROR 0.0
+15:53:16 | root | ERROR 0.0
+15:53:16 | root | ERROR 0.0
+15:53:17 | root | ERROR 0.00648
+15:53:18 | root | ERROR 0.010113
+15:53:18 | root | ERROR 0.0
+15:53:19 | root | ERROR 0.0
+15:53:20 | root | ERROR 0.0
+15:53:20 | root | INFO player got hit! for 1 hp ( 9/10left )
+15:53:22 | root | DEBUG spawn enemy
+15:53:22 | root | ERROR 0.0
+15:53:22 | root | ERROR 0.00295
+15:53:23 | root | ERROR 0.0
+15:53:23 | root | ERROR 0.014655
+15:53:24 | root | ERROR 0.0
+15:53:25 | root | ERROR 0.003169
+15:53:25 | root | ERROR 0.0
+15:53:26 | root | ERROR 0.005969
+15:53:27 | root | ERROR 0.008565
+15:53:27 | root | ERROR 0.01354
+15:53:28 | root | ERROR 0.024975
+15:53:29 | root | ERROR 0.014866
+15:53:30 | root | ERROR 0.022307
+15:53:30 | root | ERROR 0.0181
+15:53:31 | root | ERROR 0.010468
+15:53:32 | root | ERROR 0.004574
+15:53:32 | root | ERROR 0.013015
+15:53:33 | root | ERROR 0.031705
+15:53:33 | root | ERROR 0.019159
+15:53:34 | root | ERROR 0.0
+15:53:35 | root | DEBUG spawn enemy
+15:53:35 | root | ERROR 0.0
+15:53:35 | root | ERROR 0.007797
+15:53:35 | root | INFO player got hit! for 1 hp ( 8/10left )
+15:53:36 | root | ERROR 0.013096
+15:53:36 | root | ERROR 0.017373
+15:53:37 | root | ERROR 0.034726
+15:53:38 | root | ERROR 0.012525
+15:53:38 | root | ERROR 0.018738
+15:53:39 | root | ERROR 0.002597
+15:53:40 | root | ERROR 0.018259
+15:53:40 | root | ERROR 0.013917
+15:53:41 | root | ERROR 0.017777
+15:53:42 | root | ERROR 0.010012
+15:53:42 | root | ERROR 0.012305
+15:53:43 | root | ERROR 0.029569
+15:53:44 | root | ERROR 0.029866
+15:53:44 | root | ERROR 0.034581
+15:53:45 | root | ERROR 0.015575
+15:53:45 | root | ERROR 0.001505
+15:53:46 | root | ERROR 0.001491
+15:53:47 | root | ERROR 0.008258
+15:53:47 | root | ERROR 0.021746
+15:53:48 | root | DEBUG spawn enemy
+15:53:48 | root | ERROR 0.014335
+15:53:48 | root | ERROR 0.012008
+15:53:49 | root | ERROR 0.012721
+15:53:49 | root | ERROR 0.0
+15:53:49 | root | ERROR 0.015612
+15:53:49 | root | ERROR 0.0
+15:53:50 | root | ERROR 0.028172
+15:53:50 | root | ERROR 0.016135
+15:53:51 | root | ERROR 0.015889
+15:53:51 | root | ERROR 0.015651
+15:53:51 | root | ERROR 0.002788
+15:53:51 | root | ERROR 0.0
+15:53:52 | root | ERROR 0.012417
+15:53:52 | root | ERROR 0.0
+15:53:52 | root | ERROR 0.011921
+15:53:52 | root | ERROR 0.0
+15:53:53 | root | ERROR 0.014675
+15:53:53 | root | ERROR 0.0
+15:53:54 | root | ERROR 0.0
+15:53:54 | root | ERROR 0.0
+15:53:54 | root | ERROR 0.019851
+15:53:54 | root | ERROR 0.0
+15:53:55 | root | ERROR 0.024681
+15:53:55 | root | ERROR 0.015754
+15:53:56 | root | ERROR 0.0
+15:53:56 | root | ERROR 0.0
+15:53:56 | root | INFO player got hit! for 1 hp ( 7/10left )
+15:53:56 | root | ERROR 0.0
+15:53:57 | root | ERROR 0.016848
+15:53:58 | root | ERROR 0.028926
+15:53:58 | root | ERROR 0.027716
+15:53:59 | root | ERROR 0.03478
+15:53:59 | root | ERROR 0.017171
+15:54:00 | root | ERROR 0.010047
+15:54:01 | root | DEBUG spawn enemy
+15:54:01 | root | ERROR 0.0
+15:54:01 | root | ERROR 0.0
+15:54:01 | root | ERROR 0.015954
+15:54:01 | root | ERROR 0.0
+15:54:02 | root | ERROR 0.021574
+15:54:02 | root | ERROR 0.012892
+15:54:03 | root | ERROR 0.01812
+15:54:03 | root | ERROR 0.015665
+15:54:03 | root | ERROR 0.014077
+15:54:03 | root | ERROR 0.008927
+15:54:04 | root | ERROR 0.0
+15:54:04 | root | ERROR 0.0
+15:54:04 | root | ERROR 0.0
+15:54:05 | root | ERROR 0.010673
+15:54:05 | root | INFO player got hit! for 1 hp ( 6/10left )
+15:54:05 | root | ERROR 0.0
+15:54:05 | root | INFO player got hit! for 1 hp ( 5/10left )
+15:54:12 | root | DEBUG spawn enemy
+15:54:12 | root | ERROR 0.012534
+15:54:13 | root | ERROR 0.015901
+15:54:14 | root | ERROR 0.019004
+15:54:14 | root | ERROR 0.0
+15:54:15 | root | ERROR 0.007754
+15:54:15 | root | ERROR 0.0
+15:54:16 | root | ERROR 0.0
+15:54:16 | root | ERROR 0.0
+15:54:17 | root | ERROR 0.000527
+15:54:18 | root | ERROR 0.0
+15:54:18 | root | ERROR 0.006839
+15:54:19 | root | ERROR 0.0
+15:54:19 | root | ERROR 0.0
+15:54:20 | root | ERROR 0.0
+15:54:20 | root | ERROR 0.0
+15:54:21 | root | ERROR 0.0
+15:54:22 | root | ERROR 0.0
+15:54:22 | root | ERROR 0.011693
+15:54:23 | root | ERROR 0.002199
+15:54:23 | root | ERROR 0.0
+15:54:24 | root | DEBUG spawn enemy
+15:54:24 | root | ERROR 0.0
+15:54:24 | root | ERROR 0.014981
+15:54:25 | root | ERROR 0.019435
+15:54:25 | root | ERROR 0.007278
+15:54:26 | root | ERROR 0.005464
+15:54:27 | root | ERROR 0.007504
+15:54:27 | root | ERROR 0.0
+15:54:28 | root | ERROR 0.0
+15:54:29 | root | ERROR 0.0
+15:54:29 | root | INFO player got hit! for 1 hp ( 4/10left )
+15:54:34 | root | INFO Change screen!
+15:54:34 | root | INFO GameStart: render again
+15:54:34 | root | ERROR Backup: updating without a item to run!
+15:55:33 | root | INFO MainMenu: start running
+15:55:36 | root | INFO MainMenu: PLAY
+15:55:36 | root | INFO Player created!
+15:55:36 | root | DEBUG add Player movement
+15:55:36 | root | DEBUG size_x: 73
+15:55:36 | root | DEBUG size_y: 201
+15:55:36 | root | INFO GameStart: render again
+15:55:36 | root | INFO Level2 | start run
+15:55:48 | root | DEBUG spawn enemy
+15:55:48 | root | ERROR 0.0
+15:55:49 | root | ERROR 0.0
+15:55:50 | root | ERROR 0.0
+15:55:50 | root | ERROR 0.0
+15:55:51 | root | ERROR 0.008114
+15:55:51 | root | ERROR 0.0
+15:55:52 | root | ERROR 0.0
+15:55:52 | root | ERROR 0.0
+15:55:53 | root | ERROR 0.0
+15:55:54 | root | ERROR 0.0
+15:55:54 | root | DEBUG Start Closing Menu
+15:55:54 | root | ERROR 0.0
+15:55:55 | root | ERROR 0.0
+15:55:55 | root | DEBUG Start Opening Menu
+15:55:55 | root | ERROR 0.0
+15:55:56 | root | DEBUG Start Closing Menu
+15:55:56 | root | ERROR 0.0
+15:55:56 | root | ERROR 0.0
+15:55:56 | root | INFO player got hit! for 1 hp ( 9/10left )
+15:56:00 | root | DEBUG Start Opening Menu
+15:56:00 | root | DEBUG spawn enemy
+15:56:00 | root | ERROR 0.001998
+15:56:01 | root | ERROR 0.0
+15:56:01 | root | ERROR 0.0
+15:56:02 | root | ERROR 0.0
+15:56:02 | root | ERROR 0.0
+15:56:03 | root | ERROR 0.0
+15:56:04 | root | ERROR 0.0
+15:56:04 | root | ERROR 0.0
+15:56:05 | root | ERROR 0.0
+15:56:05 | root | INFO player got hit! for 1 hp ( 8/10left )
+15:56:13 | root | DEBUG spawn enemy
+15:56:13 | root | ERROR 0.0
+15:56:13 | root | ERROR 0.003146
+15:56:14 | root | ERROR 0.0
+15:56:15 | root | ERROR 0.0
+15:56:15 | root | ERROR 0.0
+15:56:16 | root | ERROR 0.0
+15:56:16 | root | ERROR 0.0
+15:56:17 | root | ERROR 0.0
+15:56:18 | root | ERROR 0.0
+15:56:18 | root | ERROR 0.00238
+15:56:19 | root | ERROR 0.0
+15:56:19 | root | ERROR 0.0
+15:56:20 | root | ERROR 0.0
+15:56:21 | root | ERROR 0.0
+15:56:21 | root | INFO player got hit! for 1 hp ( 7/10left )
+15:56:25 | root | DEBUG spawn enemy
+15:56:25 | root | ERROR 0.0
+15:56:26 | root | ERROR 0.000562
+15:56:26 | root | ERROR 0.002895
+15:56:27 | root | ERROR 0.0
+15:56:27 | root | ERROR 0.0
+15:56:28 | root | ERROR 0.003668
+15:56:29 | root | ERROR 0.0
+15:56:29 | root | ERROR 0.0
+15:56:30 | root | ERROR 0.0
+15:56:30 | root | ERROR 0.00159
+15:56:31 | root | ERROR 0.0
+15:56:32 | root | ERROR 0.0
+15:56:32 | root | ERROR 0.0
+15:56:33 | root | ERROR 0.0
+15:56:33 | root | ERROR 0.0
+15:56:34 | root | INFO player got hit! for 1 hp ( 6/10left )
+15:56:37 | root | DEBUG spawn enemy
+15:56:37 | root | ERROR 0.002422
+15:56:38 | root | ERROR 0.000557
+15:56:38 | root | ERROR 0.0
+15:56:39 | root | ERROR 0.0
+15:56:40 | root | ERROR 0.001501
+15:56:40 | root | ERROR 0.0
+15:56:41 | root | ERROR 0.0
+15:56:42 | root | ERROR 0.0
+15:56:42 | root | ERROR 0.0
+15:56:42 | root | INFO player got hit! for 1 hp ( 5/10left )
+15:56:50 | root | DEBUG spawn enemy
+15:56:50 | root | ERROR 0.0
+15:56:51 | root | ERROR 0.0
+15:56:51 | root | ERROR 0.003102
+15:56:52 | root | ERROR 0.0
+15:56:53 | root | ERROR 0.002564
+15:56:53 | root | ERROR 0.0
+15:56:54 | root | ERROR 0.0
+15:56:54 | root | ERROR 0.0
+15:56:55 | root | ERROR 0.0
+15:56:56 | root | ERROR 0.0
+15:56:56 | root | INFO player got hit! for 1 hp ( 4/10left )
+15:57:03 | root | DEBUG spawn enemy
+15:57:03 | root | ERROR 0.0
+15:57:03 | root | ERROR 0.003259
+15:57:04 | root | ERROR 0.0
+15:57:05 | root | ERROR 0.001464
+15:57:05 | root | ERROR 0.002753
+15:57:06 | root | ERROR 0.0
+15:57:07 | root | ERROR 0.0
+15:57:07 | root | ERROR 0.0
+15:57:08 | root | ERROR 0.0
+15:57:09 | root | ERROR 0.0
+15:57:09 | root | INFO player got hit! for 1 hp ( 3/10left )
+15:57:15 | root | DEBUG spawn enemy
+15:57:15 | root | ERROR 0.0
+15:57:16 | root | ERROR 0.003294
+15:57:17 | root | ERROR 0.0
+15:57:17 | root | ERROR 0.0
+15:57:18 | root | ERROR 0.005763
+15:57:19 | root | ERROR 0.0
+15:57:19 | root | ERROR 0.0
+15:57:20 | root | ERROR 0.0
+15:57:20 | root | ERROR 0.0
+15:57:21 | root | ERROR 0.0
+15:57:21 | root | ERROR 0.0
+15:57:22 | root | ERROR 0.0
+15:57:22 | root | ERROR 0.0
+15:57:22 | root | INFO player got hit! for 1 hp ( 2/10left )
+15:57:27 | root | DEBUG spawn enemy
+15:57:27 | root | ERROR 0.00458
+15:57:27 | root | ERROR 0.0
+15:57:28 | root | ERROR 0.0
+15:57:28 | root | ERROR 0.002983
+15:57:29 | root | ERROR 0.0
+15:57:29 | root | ERROR 0.0
+15:57:30 | root | ERROR 0.005531
+15:57:31 | root | ERROR 0.002714
+15:57:31 | root | ERROR 0.001148
+15:57:32 | root | ERROR 0.0
+15:57:32 | root | ERROR 0.0
+15:57:33 | root | ERROR 0.0
+15:57:33 | root | ERROR 0.0
+15:57:34 | root | ERROR 0.0
+15:57:34 | root | INFO player got hit! for 1 hp ( 1/10left )
+15:57:38 | root | DEBUG spawn enemy
+15:57:38 | root | ERROR 0.0
+15:57:38 | root | ERROR 0.0
+15:57:39 | root | ERROR 0.0
+15:57:39 | root | ERROR 0.0
+15:57:40 | root | ERROR 0.000518
+15:57:41 | root | ERROR 0.006836
+15:57:41 | root | ERROR 0.0
+15:57:42 | root | ERROR 0.0
+15:57:42 | root | ERROR 0.0
+15:57:43 | root | ERROR 0.0
+15:57:43 | root | ERROR 0.001474
+15:57:44 | root | ERROR 0.000528
+15:57:44 | root | ERROR 0.0
+15:57:44 | root | INFO player got hit! for 1 hp ( 0/10left )
+15:57:44 | root | INFO Player dead!
+15:57:44 | root | INFO Change screen!
+15:57:44 | root | INFO GameStart: render again
+15:57:44 | root | INFO MainMenu: start running
+15:58:34 | root | INFO Change screen!
+15:58:34 | root | INFO MainMenu: QUITING
+16:11:22 | root | INFO MainMenu: start running
+16:11:23 | root | INFO MainMenu: PLAY
+16:11:23 | root | INFO Player created!
+16:11:24 | root | DEBUG add Player movement
+16:11:24 | root | DEBUG size_x: 73
+16:11:24 | root | DEBUG size_y: 201
+16:11:24 | root | INFO GameStart: render again
+16:11:24 | root | INFO Level2 | start run
+16:11:29 | root | DEBUG Start Closing Menu
+16:11:30 | root | DEBUG Start Opening Menu
+16:11:36 | root | DEBUG spawn enemy
+16:11:36 | root | ERROR 0.005019
+16:11:37 | root | ERROR 0.005882
+16:11:38 | root | ERROR 0.008045
+16:11:38 | root | ERROR 0.005403
+16:11:39 | root | ERROR 0.012124
+16:11:39 | root | ERROR 0.019518
+16:11:40 | root | ERROR 0.009085
+16:11:41 | root | ERROR 0.011497
+16:11:41 | root | ERROR 0.011651
+16:11:42 | root | ERROR 0.005521
+16:11:43 | root | ERROR 0.006542
+16:11:43 | root | ERROR 0.0
+16:11:44 | root | ERROR 0.00805
+16:11:45 | root | ERROR 0.004549
+16:11:45 | root | ERROR 0.0
+16:11:46 | root | ERROR 0.007694
+16:11:46 | root | ERROR 0.0
+16:11:47 | root | ERROR 0.0
+16:11:48 | root | ERROR 0.0
+16:11:48 | root | ERROR 0.0
+16:11:49 | root | DEBUG spawn enemy
+16:11:49 | root | ERROR 0.0
+16:11:49 | root | ERROR 0.008027
+16:11:50 | root | ERROR 0.0
+16:11:50 | root | ERROR 0.009597
+16:11:50 | root | ERROR 0.0
+16:11:50 | root | ERROR 0.013367
+16:11:50 | root | INFO player got hit! for 1 hp ( 9/10left )
+16:11:51 | root | ERROR 0.013114
+16:11:52 | root | ERROR 0.013014
+16:11:52 | root | ERROR 0.01308
+16:11:53 | root | ERROR 0.010365
+16:11:54 | root | ERROR 0.008312
+16:11:54 | root | ERROR 0.013047
+16:11:55 | root | ERROR 0.008496
+16:11:55 | root | ERROR 0.00718
+16:11:56 | root | ERROR 0.005539
+16:11:57 | root | ERROR 0.007523
+16:11:57 | root | ERROR 0.006579
+16:11:58 | root | ERROR 0.008049
+16:11:59 | root | ERROR 0.005033
+16:11:59 | root | ERROR 0.00783
+16:12:00 | root | ERROR 0.005379
+16:12:01 | root | ERROR 0.0
+16:12:01 | root | ERROR 0.0
+16:12:02 | root | DEBUG spawn enemy
+16:12:02 | root | ERROR 0.008536
+16:12:02 | root | ERROR 0.0
+16:12:02 | root | ERROR 0.016162
+16:12:02 | root | ERROR 0.0
+16:12:03 | root | ERROR 0.00774
+16:12:03 | root | ERROR 0.001331
+16:12:04 | root | ERROR 0.008025
+16:12:04 | root | ERROR 0.0
+16:12:04 | root | ERROR 0.011977
+16:12:04 | root | ERROR 0.0
+16:12:04 | root | INFO player got hit! for 1 hp ( 8/10left )
+16:12:05 | root | ERROR 0.008067
+16:12:06 | root | ERROR 0.014817
+16:12:06 | root | ERROR 0.0
+16:12:07 | root | ERROR 0.00806
+16:12:08 | root | ERROR 0.005524
+16:12:08 | root | ERROR 0.002969
+16:12:09 | root | ERROR 0.005016
+16:12:09 | root | ERROR 0.0
+16:12:10 | root | ERROR 0.005263
+16:12:11 | root | ERROR 0.007524
+16:12:11 | root | ERROR 0.0
+16:12:12 | root | ERROR 0.0
+16:12:13 | root | ERROR 0.00163
+16:12:13 | root | ERROR 0.0
+16:12:14 | root | ERROR 0.005388
+16:12:14 | root | DEBUG spawn enemy
+16:12:14 | root | ERROR 0.004069
+16:12:15 | root | ERROR 0.007538
+16:12:15 | root | ERROR 0.016097
+16:12:15 | root | ERROR 0.008108
+16:12:16 | root | ERROR 0.044638
+16:12:16 | root | ERROR 0.046832
+16:12:16 | root | ERROR 0.084861
+16:12:17 | root | ERROR 0.067731
+16:12:17 | root | ERROR 0.128877
+16:12:17 | root | ERROR 0.116303
+16:12:18 | root | ERROR 0.170061
+16:12:18 | root | ERROR 0.177202
+16:12:18 | root | DEBUG Start Closing Menu
+16:12:19 | root | ERROR 0.198775
+16:12:19 | root | ERROR 0.192766
+16:12:20 | root | ERROR 0.211497
+16:12:20 | root | ERROR 0.218294
+16:12:21 | root | ERROR 0.229963
+16:12:22 | root | ERROR 0.229641
+16:12:22 | root | ERROR 0.258093
+16:12:23 | root | ERROR 0.265954
+16:12:24 | root | ERROR 0.343518
+16:12:24 | root | ERROR 0.331613
+16:12:25 | root | ERROR 0.401973
+16:12:25 | root | ERROR 0.411809
+16:12:26 | root | ERROR 0.398214
+16:12:27 | root | DEBUG Start Opening Menu
+16:12:27 | root | ERROR 0.442787
+16:12:28 | root | ERROR 0.373817
+16:12:28 | root | ERROR 0.46395
+16:12:29 | root | ERROR 0.342248
+16:12:29 | root | ERROR 0.333536
+16:12:31 | root | ERROR 0.480285
+16:12:31 | root | ERROR 0.423721
+16:12:34 | root | ERROR 0.953515
+16:12:35 | root | ERROR 1.024909
+16:12:38 | root | INFO Change screen!
+16:12:38 | root | INFO GameStart: render again
+16:12:38 | root | ERROR Backup: updating without a item to run!
+16:12:40 | root | INFO Change screen!
+16:12:46 | root | INFO MainMenu: start running
+16:12:47 | root | INFO MainMenu: PLAY
+16:12:47 | root | INFO Player created!
+16:12:47 | root | DEBUG add Player movement
+16:12:47 | root | DEBUG size_x: 73
+16:12:47 | root | DEBUG size_y: 201
+16:12:47 | root | INFO GameStart: render again
+16:12:47 | root | INFO Level2 | start run
+16:12:58 | root | DEBUG spawn enemy
+16:12:59 | root | ERROR 0.350525
+16:13:00 | root | ERROR 0.395827
+16:13:01 | root | ERROR 0.365467
+16:13:02 | root | ERROR 0.314195
+16:13:02 | root | ERROR 0.340438
+16:13:03 | root | ERROR 0.348668
+16:13:04 | root | ERROR 0.306935
+16:13:05 | root | ERROR 0.269849
+16:13:06 | root | ERROR 0.274888
+16:13:07 | root | ERROR 0.234757
+16:13:08 | root | ERROR 0.209999
+16:13:08 | root | ERROR 0.219636
+16:13:09 | root | ERROR 0.169573
+16:13:10 | root | ERROR 0.181986
+16:13:11 | root | ERROR 0.137421
+16:13:11 | root | ERROR 0.145288
+16:13:12 | root | ERROR 0.117883
+16:13:13 | root | ERROR 0.092444
+16:13:13 | root | ERROR 0.072017
+16:13:14 | root | ERROR 0.041727
+16:13:15 | root | DEBUG spawn enemy
+16:13:15 | root | ERROR 0.013635
+16:13:15 | root | ERROR 0.017971
+16:13:15 | root | ERROR 0.012438
+16:13:15 | root | ERROR 0.020088
+16:13:16 | root | ERROR 0.0
+16:13:16 | root | ERROR 0.013141
+16:13:17 | root | ERROR 0.00552
+16:13:17 | root | ERROR 0.009753
+16:13:18 | root | ERROR 0.00798
+16:13:18 | root | ERROR 0.0
+16:13:19 | root | ERROR 0.0
+16:13:20 | root | ERROR 0.0
+16:13:20 | root | ERROR 0.0
+16:13:21 | root | ERROR 0.0
+16:13:22 | root | ERROR 0.0
+16:13:22 | root | INFO player got hit! for 1 hp ( 9/10left )
+16:13:27 | root | DEBUG spawn enemy
+16:13:27 | root | ERROR 0.010797
+16:13:28 | root | ERROR 0.007966
+16:13:29 | root | ERROR 0.015149
+16:13:29 | root | ERROR 0.016896
+16:13:30 | root | ERROR 0.024855
+16:13:30 | root | ERROR 0.013091
+16:13:31 | root | ERROR 0.019894
+16:13:32 | root | ERROR 0.016043
+16:13:32 | root | ERROR 0.016791
+16:13:33 | root | ERROR 0.021289
+16:13:34 | root | ERROR 0.004026
+16:13:34 | root | ERROR 0.0
+16:13:35 | root | ERROR 0.0
+16:13:36 | root | ERROR 0.0
+16:13:36 | root | ERROR 0.0
+16:13:37 | root | ERROR 0.000511
+16:13:37 | root | ERROR 0.0
+16:13:40 | root | DEBUG spawn enemy
+16:13:40 | root | ERROR 0.005863
+16:13:40 | root | ERROR 0.0
+16:13:41 | root | ERROR 0.0
+16:13:42 | root | ERROR 0.0
+16:13:42 | root | ERROR 0.0
+16:13:43 | root | ERROR 0.001247
+16:13:44 | root | ERROR 0.0
+16:13:44 | root | ERROR 0.0
+16:13:45 | root | ERROR 0.0
+16:13:45 | root | ERROR 0.0
+16:13:45 | root | INFO player got hit! for 1 hp ( 8/10left )
+16:13:52 | root | DEBUG spawn enemy
+16:13:52 | root | ERROR 0.024587
+16:13:53 | root | ERROR 0.013112
+16:13:53 | root | ERROR 0.023023
+16:13:54 | root | ERROR 0.014114
+16:13:55 | root | ERROR 0.015381
+16:13:55 | root | ERROR 0.007997
+16:13:56 | root | ERROR 0.005034
+16:13:56 | root | ERROR 0.005013
+16:13:57 | root | ERROR 0.003012
+16:13:58 | root | ERROR 0.0
+16:13:58 | root | ERROR 0.007176
+16:13:59 | root | ERROR 0.008035
+16:13:59 | root | ERROR 0.003549
+16:14:00 | root | ERROR 0.0
+16:14:01 | root | ERROR 0.00804
+16:14:01 | root | ERROR 0.0
+16:14:02 | root | ERROR 0.0
+16:14:02 | root | ERROR 0.005681
+16:14:03 | root | ERROR 0.005834
+16:14:04 | root | ERROR 0.0
+16:14:04 | root | DEBUG spawn enemy
+16:14:04 | root | ERROR 0.0
+16:14:04 | root | ERROR 0.005039
+16:14:05 | root | ERROR 0.0
+16:14:05 | root | ERROR 0.002543
+16:14:05 | root | ERROR 0.0
+16:14:05 | root | ERROR 0.002902
+16:14:06 | root | INFO player got hit! for 1 hp ( 7/10left )
+16:14:06 | root | ERROR 0.00663
+16:14:07 | root | ERROR 0.0
+16:14:07 | root | ERROR 0.004549
+16:14:08 | root | ERROR 0.0
+16:14:09 | root | ERROR 0.0
+16:14:09 | root | ERROR 0.0
+16:14:10 | root | ERROR 0.00202
+16:14:10 | root | ERROR 0.0
+16:14:11 | root | ERROR 0.0
+16:14:11 | root | INFO player got hit! for 1 hp ( 6/10left )
+16:14:17 | root | DEBUG spawn enemy
+16:14:17 | root | ERROR 0.001138
+16:14:17 | root | ERROR 0.0
+16:14:18 | root | ERROR 0.003046
+16:14:18 | root | INFO player got hit! for 1 hp ( 5/10left )
+16:14:25 | root | INFO Change screen!
+16:14:25 | root | INFO GameStart: render again
+16:14:25 | root | ERROR Backup: updating without a item to run!

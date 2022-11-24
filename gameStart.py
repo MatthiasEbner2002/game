@@ -10,7 +10,7 @@ def main(screen):
     curses.start_color()
     curses.use_default_colors()
     curses.init_pair(1, 1, -1)                # red
-    curses.init_pair(2, 12, -1)              # orange
+    curses.init_pair(2, 12, -1)               # orange
     curses.init_pair(3, 3, -1)                # yellow
     curses.init_pair(4, 2, -1)                # green
     curses.init_pair(5, 4, -1)                # blue
