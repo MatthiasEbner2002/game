@@ -5,10 +5,10 @@ import logging
 import keyboard
 import random
 from myLogger import info, debug, error
+import math
 #import components.other.AStar as AStar
 from datetime import datetime
 from astar.search import AStar
-
 
 
 class Menu:
@@ -138,6 +138,7 @@ class Player:
         self.attacks = []
         self.isAlive = True
         self.input = Input()
+        self.color = curses.color_pair(5)
 
         self.addMovement()
         self.addAttack2()
@@ -307,7 +308,7 @@ class Input:
 class Enemy:
     def __init__(self, player, size_y, size_x, position_x=None, position_y=None, field=None, borders=None):
         self.player = player
-        self.icon = '@'
+        self.icon = '+'
         self.size_x = size_x
         self.size_y = size_y
         self.x = position_x
@@ -332,16 +333,20 @@ class Enemy:
             self.isAlive = False
         if field[self.x][self.y] in self.die_to:
             self.isAlive = False
-        if self.steps % 15 == 0:
-            # error("AStar: " + str(hash(self)) + " | Start")
+        distance_to_player = math.sqrt(int((self.x - self.player.x) / 2) ** 2 + int(self.y - self.player.y) ** 2)
+        if self.steps >= 15 and distance_to_player <= 30:
             time = datetime.now()
             path = AStar(self.borders).search((self.x, self.y), (self.player.x, self.player.y))
-            # error("AStar: " + str(hash(self)) + " | End")
-            error(str(( datetime.now() - time).total_seconds()))
-            if len(path) >= 1:
-                next_step = path[1]
-            else:
-                next_step = path[0]
+            time_taken = (datetime.now() - time).total_seconds()
+            if time_taken > 0.01:
+                info(str(time_taken))
+            if path is not None:
+                if len(path) > 1:
+                    next_step = path[1]
+                else:
+                    next_step = path[0]
+                self.x = next_step[0]
+                self.y = next_step[1]
             # debug(str(next_step))
             self.steps = 1
             """
@@ -355,8 +360,6 @@ class Enemy:
             elif self.player.y > self.y:
                 self.y += 1
             """
-            self.x = next_step[0]
-            self.y = next_step[1]
         else:
             self.steps += 1
 
@@ -369,7 +372,7 @@ class EnemySpawn:
 
         self.lvl1 = lvl1
 
-        self.icon = '֎'
+        self.icon = 'X'
 
         self.size_x = x
         self.size_y = y
@@ -381,7 +384,7 @@ class EnemySpawn:
         self.x = position_x
         self.y = position_y
         self.steps = 0
-        self.max_steps = 300
+        self.max_steps = 100
 
     def step(self, field):
         self.steps += 1

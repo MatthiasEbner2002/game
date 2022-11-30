@@ -7,6 +7,7 @@ from components.menus.screen_mainMenu import Screen_MainMenu
 def main(screen):
     curses.noecho()
     curses.initscr()
+    """
     curses.start_color()
     curses.use_default_colors()
     curses.init_pair(1, 1, -1)                # red
@@ -15,6 +16,11 @@ def main(screen):
     curses.init_pair(4, 2, -1)                # green
     curses.init_pair(5, 4, -1)                # blue
     curses.init_pair(6, 5, -1)                # purple
+    """
+    curses.start_color()
+    curses.use_default_colors()
+    for i in range(0, 255):
+        curses.init_pair(i + 1, i, -1)
 
     # for i in range(4, 255):
     #   curses.init_pair(i + 1, i, -1)

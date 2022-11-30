@@ -1,7 +1,8 @@
 from datetime import datetime
-from myLogger import debug, logLines
+from myLogger import debug, logLines, error_text, debug_text, info_text
 import time
 from components.other.ClassesDefault import Size, EnemySpawn
+from components.other.UI import UI, UI_Info, UI_Logger
 import logging
 import curses
 import keyboard
@@ -12,6 +13,13 @@ mutex_y = Lock()
 
 class Level_Default:
     def __init__(self, term, screen, player=None, blank_field=None) -> None:
+        self.screen = screen
+        self.terminal_size = Size.from_terminal_size(screen=self.screen)
+        self.UI = UI(screen=screen)
+        info = UI_Info(screen, player, 10, 30, 0, 0, -1)
+        logger = UI_Logger(screen, 10, -1, 0, 30, -1)
+        self.UI.addElement(info)
+        self.UI.addElement(logger)
         self.menu_size_x = 9
         self.menu_size_at_the_moment = self.menu_size_x
         self.menu_is_open = True
@@ -32,9 +40,7 @@ class Level_Default:
         self.player = player
         self.enemys = []
         self.enemys.append(EnemySpawn(self.player, self, self.size_y, self.size_x, 3, 3))
-        self.screen = screen
         self.running = True
-        self.terminal_size = Size.from_terminal_size(screen=self.screen)
         self.terminal_size.x -= 10
         self.origin = Size(1, 1)
         self.terminal_size_real_x = self.terminal_size.x + 10
@@ -81,11 +87,6 @@ class Level_Default:
             else:
                 self.enemys.remove(enemy)
 
-        # if self.player.x >= self.actual_position_x + x - self.player.border_distance:
-        #     if self.actual_position_x + x < self.size_x:
-        #         self.actual_position_x += 1
-        #     else:
-        #         self.actual_position_x -= 1
         if renderPlayer:
             mutex_x.acquire()
             if self.player.x + self.player.x_input > 0 and self.player.x + self.player.x_input < self.size_x:
@@ -133,8 +134,10 @@ class Level_Default:
             time.sleep(0.025)
 
     def _render(self):
+        self.UI.render()
+        return
         self.screen.clear()
-        color = curses.color_pair(-1)
+        default_color = curses.color_pair(16)
         size = Size.from_terminal_size(self.screen)
 
         if self.menu_is_opening:
@@ -154,47 +157,48 @@ class Level_Default:
         for i in range(size.x - self.origin.x):
             for j in range(size.y - self.origin.y):
                 self.screen.addstr(i + self.origin.x, j + self.origin.y,
-                                   self.field[self.actual_position_x + i][self.actual_position_y + j], color)
+                                   self.field[self.actual_position_x + i][self.actual_position_y + j], default_color)
 
         for i in range(size.y):
-            self.screen.addstr(0, i, '═', color)
+            self.screen.addstr(0, i, '═', default_color)
         for i in range(size.y):
-            self.screen.addstr(size.x - 1, i, '═', color)
+            self.screen.addstr(size.x - 1, i, '═', default_color)
 
         for i in range(size.x):
-            self.screen.addstr(i, 0, '║', color)
-            self.screen.addstr(i, size.y - 1, '║', color)
+            self.screen.addstr(i, 0, '║', default_color)
+            self.screen.addstr(i, size.y - 1, '║', default_color)
 
-        self.screen.addstr(0, 0, '╔', color)
-        self.screen.addstr(0, size.y - 1, '╗', color)
-        self.screen.addstr(size.x - 1, 0, '╚', color)
-        self.screen.addstr(size.x - 1, size.y - 1, '╝', color)
+        self.screen.addstr(0, 0, '╔', default_color)
+        self.screen.addstr(0, size.y - 1, '╗', default_color)
+        self.screen.addstr(size.x - 1, 0, '╚', default_color)
+        self.screen.addstr(size.x - 1, size.y - 1, '╝', default_color)
 
         if self.menu_is_open is True or self.menu_is_closing is True or self.menu_is_opening is True:
             Infos = self.addInfos()
             for i in range(self.menu_size_at_the_moment):
                 for j in range(30):
-                    self.screen.addstr(i + size.x, j, Infos[i][j], color)
+                    self.screen.addstr(i + size.x, j, Infos[i][j][0], curses.color_pair(Infos[i][j][1]))
             if not self.showLogs:
                 Log = self.addLogs()
                 for i in range(self.menu_size_at_the_moment):
                     for j in range(self.terminal_size.y - 30):
-                        self.screen.addstr(i + size.x, j + 30, Log[i][j], color)
+                        self.screen.addstr(i + size.x, j + 30, Log[i][j][0], curses.color_pair(Log[i][j][1]))
             else:
                 Inv = self.addInventory()
                 for i in range(self.menu_size_at_the_moment):
                     for j in range(self.terminal_size.y - 30):
-                        self.screen.addstr(i + size.x, j + 30, Inv[i][j], color)
+                        self.screen.addstr(i + size.x, j + 30, Inv[i][j], default_color)
         else:
             hpText = self.getHpText()
-            self.screen.addstr(self.terminal_size_real_x - 3, 0, '╠', color)
+            self.screen.addstr(self.terminal_size_real_x - 3, 0, '╠', default_color)
             for i in range(1, len(hpText) + 1):
-                self.screen.addstr(self.terminal_size_real_x - 3, i, '═', color)
-                self.screen.addstr(self.terminal_size_real_x - 2, i, hpText[i - 1], color)
+                self.screen.addstr(self.terminal_size_real_x - 3, i, '═', default_color)
+                self.screen.addstr(self.terminal_size_real_x - 2, i,
+                                   hpText[i - 1][0], curses.color_pair(hpText[i - 1][1]))
 
-            self.screen.addstr(self.terminal_size_real_x - 3, len(hpText) + 1, '╗', color)
-            self.screen.addstr(self.terminal_size_real_x - 2, len(hpText) + 1, '║', color)
-            self.screen.addstr(self.terminal_size_real_x - 1, len(hpText) + 1, '╩', color)
+            self.screen.addstr(self.terminal_size_real_x - 3, len(hpText) + 1, '╗', default_color)
+            self.screen.addstr(self.terminal_size_real_x - 2, len(hpText) + 1, '║', default_color)
+            self.screen.addstr(self.terminal_size_real_x - 1, len(hpText) + 1, '╩', default_color)
 
     def _addCloseFunction(self):
         keyboard.on_press_key('q', lambda _: self._changeScreen())
@@ -273,36 +277,30 @@ class Level_Default:
 
         infos_size_x = self.menu_size_x
         infos_size_y = 30
-        Infos = [[' ' for i in range(infos_size_y + 1)]
-                 for j in range(infos_size_x + 1)]
+        Infos = self.getArrayWithBorderAndColor(infos_size_x, infos_size_y, 3)
         hpText = self.getHpText()
         positionLineOne = 2
-
         for i in range(2, 2 + len(hpText)):
             Infos[positionLineOne][i] = hpText[i - 2]
-
-        for i in range(0, infos_size_x):
-            Infos[i][0] = '║'
-            Infos[i][infos_size_y - 1] = '║'
-
-        for i in range(0, infos_size_y - 1):
-            Infos[0][i] = '═'
-            Infos[infos_size_x - 1][i] = '═'
-
-        Infos[0][infos_size_y - 1] = '╗'
-        Infos[infos_size_x - 1][infos_size_y - 1] = '╝'
-        Infos[infos_size_x - 1][0] = '╚'
-        Infos[0][0] = '╔'
         return Infos
 
     def getHpText(self):
-        hpText = "HP:"
-        for i in range(self.player.hp // 2):
-            hpText += '♥'
+        defaut_color = 16
+        heart_color = 5
+        hpText = [(' ', defaut_color) for i in range((self.player.max_hp // 2) + (self.player.max_hp % 2) + 3)]
+        hpText[0] = ('H', defaut_color)
+        hpText[1] = ('P', defaut_color)
+        hpText[2] = (':', defaut_color)
+        i = 0
+        while i < self.player.hp // 2:
+            i += 1
+            hpText[i + 2] = ('♥', heart_color)
         if self.player.hp % 2 == 1:
-            hpText += '½'
-        for i in range((self.player.max_hp - self.player.hp) // 2):
-            hpText += '♡'
+            i += 1
+            hpText[i + 2] = ('½', -1)
+        while i < self.player.max_hp // 2 + self.player.max_hp % 2:
+            i += 1
+            hpText[i + 2] = ('♡', -1)
         return hpText
 
     def addLogs(self):
@@ -310,14 +308,26 @@ class Level_Default:
         log_size_x = self.menu_size_x
         infos_size_y = 30
         log_size_y = self.terminal_size.y - (infos_size_y)
-        log = self.getArrayWithBorder(log_size_x, log_size_y)
+        log = self.getArrayWithBorderAndColor(log_size_x, log_size_y, 6)
 
         lines = amountLines if amountLines < len(logLines) else len(logLines)
         res = logLines[-lines:]
 
         for i in range(lines):
+            color = -1
+            s = str(res[i][0:5])
+            if error_text == s:
+                color = 5
+            elif info_text == s:
+                color = 3
+            elif debug_text == s:
+                color = 6
+
             for j in range(log_size_y - 1 if log_size_y - 1 < len(res[i]) else len(res[i])):
-                log[i + 1][j + 1] = res[i][j]
+                if j < 5:
+                    log[i + 1][j + 1] = (res[i][j], color)
+                else:
+                    log[i + 1][j + 1] = (res[i][j], -1)
 
         return log
 
@@ -375,10 +385,29 @@ class Level_Default:
 
         return ret
 
+    def getArrayWithBorderAndColor(self, x, y, border_color):
+        ret = [[(' ', -1) for i in range(y + 1)]
+               for j in range(x + 1)]
+
+        for i in range(0, x):
+            ret[i][0] = ('║', border_color)
+            ret[i][y - 1] = ('║', border_color)
+
+        for i in range(0, y - 1):
+            ret[0][i] = ('═', border_color)
+            ret[x - 1][i] = ('═', border_color)
+
+        ret[0][y - 1] = ('╗', border_color)
+        ret[x - 1][y - 1] = ('╝', border_color)
+        ret[x - 1][0] = ('╚', border_color)
+        ret[0][0] = ('╔', border_color)
+
+        return ret
+
     def _get01Field(self, blank_field):
         size_y = len(blank_field[0]) - 1
         size_x = len(blank_field)
-        ret = [ [0] * size_y for _ in range(size_x)]
+        ret = [[0] * size_y for _ in range(size_x)]
         for i in range(size_x):
             for j in range(size_y):
                 if blank_field[i][j] != ' ':

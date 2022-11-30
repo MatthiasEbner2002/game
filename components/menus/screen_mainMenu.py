@@ -16,7 +16,7 @@ class Screen_MainMenu:
         self.running = True
         self.field = [['.' for i in range(self.term.size.y)]
                       for j in range(self.term.size.x)]
-        self.field_color = [[-1 for i in range(self.term.size.y)]
+        self.field_color = [[16 for i in range(self.term.size.y)]
                             for j in range(self.term.size.x)]
         self.item = [
             ' /\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\\',
@@ -39,19 +39,19 @@ class Screen_MainMenu:
             ' /\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\\',
             '|#################################################|',
             '|#|                                             |#|',
-            '|#|    1111111111122                            |#|',
-            '|#|    1111111   1222 333333 4444445555555      |#|',
-            '|#|     1    1  11  23  33334  4445   5  5      |#|',
-            '|#|     1    1   1  23333 3 4444 4 5555  5      |#|',
-            '|#|     1111111  12223333  34444  45 55555      |#|',
-            '|#|            11        33     44 55           |#|',
+            '|#|    6666666666622                            |#|',
+            '|#|    6666666   6222 333333 4444445555555      |#|',
+            '|#|     6    6  66  23  33334  4445   5  5      |#|',
+            '|#|     6    6   6  23333 3 4444 4 5555  5      |#|',
+            '|#|     6666666  62223333  34444  45 55555      |#|',
+            '|#|            66        33     44 55           |#|',
             '|#|                                             |#|',
             '|#|    (P)LAY       (S)ETTINGS       (Q)UIT     |#|',
             '|#|_____________________________________________|#|',
             '|#################################################|',
             ' \/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/'
         ]
-        self.item_color = [[-1 for i in range(self.menu_size_y)]
+        self.item_color = [[16 for i in range(self.menu_size_y)]
                            for j in range(self.menu_size_x)]
 
         for i in range(self.menu_size_x):
@@ -151,5 +151,5 @@ class Screen_MainMenu:
         self.term.size = Size.from_terminal_size(self.screen)
         self.field = [['.' for i in range(self.term.size.y)]
                       for j in range(self.term.size.x)]
-        self.field_color = [[-1 for i in range(self.term.size.y)]
+        self.field_color = [[16 for i in range(self.term.size.y)]
                             for j in range(self.term.size.x)]
