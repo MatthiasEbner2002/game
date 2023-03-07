@@ -1,4 +1,4 @@
-import keyboard
+from pynput import keyboard
 
 
 def keyboardTEST(info):

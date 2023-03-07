@@ -111,7 +111,7 @@ class Screen_MainMenu:
             #lvl = Level1(self.term)
             player = Player()
             lvl = Level_Default.from_txt(term=self.term, screen=self.screen, player=player,
-                                         path="C:\\Users\\matth\\MyGits\\game\\components\\lvl\\level2.txt")
+                                         path="components/lvl/level2.txt")
             self.changeScreen(lvl)
         elif option == 1:
             logging.info("MainMenu: SETTING")

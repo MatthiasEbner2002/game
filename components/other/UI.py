@@ -114,13 +114,13 @@ class UI_Info(UI_Component):
         i = 0
         while i < self.player.hp // 2:
             i += 1
-            hpText[i + 2] = ('♥', heart_color)
+            hpText[i + 2] = ('⣿', heart_color)
         if self.player.hp % 2 == 1:
             i += 1
-            hpText[i + 2] = ('½', 16)
+            hpText[i + 2] = ('⡇', 16)
         while i < self.player.max_hp // 2 + self.player.max_hp % 2:
             i += 1
-            hpText[i + 2] = ('♡', 16)
+            hpText[i + 2] = (' ', 16)
         return hpText
 
 
@@ -201,3 +201,7 @@ def getArrayWithBorderAndColor(x, y, border_color):
     ret[0][0] = ('╔', border_color)
 
     return ret
+
+class UI_Level_2(UI_Component):
+    def __init__(self,screen, ):
+        super.__init__(screen, 10, 10)

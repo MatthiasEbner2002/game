@@ -2,7 +2,7 @@ import copy
 import time
 import curses
 import logging
-import keyboard
+from pynput import keyboard
 import random
 from myLogger import info, debug, error
 import math
@@ -128,7 +128,7 @@ class Player:
         self.x = 10 if start_position_x is None else start_position_x
         self.y = 10 if start_position_y is None else start_position_y
         self.icon = '█'
-        self.max_hp = 10
+        self.max_hp = 20
         self.hp = self.max_hp
         self.x_input = 0
         self.y_input = 0
@@ -139,9 +139,9 @@ class Player:
         self.isAlive = True
         self.input = Input()
         self.color = curses.color_pair(5)
+        self.listener = None
 
         self.addMovement()
-        self.addAttack2()
 
     def getHit(self, hp):
         self.hp -= hp
@@ -151,45 +151,37 @@ class Player:
             info("Player dead!")
 
     def addMovement(self):
-        keyboard.on_press_key('a', lambda _: self.keyDown('a'))
-        keyboard.on_press_key('d', lambda _: self.keyDown('d'))
-        keyboard.on_press_key('s', lambda _: self.keyDown('s'))
-        keyboard.on_press_key('w', lambda _: self.keyDown('w'))
-
-        keyboard.on_release_key('a', lambda _: self.keyUp('a'))
-        keyboard.on_release_key('d', lambda _: self.keyUp('d'))
-        keyboard.on_release_key('s', lambda _: self.keyUp('s'))
-        keyboard.on_release_key('w', lambda _: self.keyUp('w'))
+        self.listener = keyboard.Listener(on_press=self.keyDown, on_release=self.keyUp)
+        self.listener.start()
         logging.debug("add Player movement")
 
     def keyDown(self, key):
         match key:
-            case 'a':
-                self.input.a = 1
-            case 'd':
+            case keyboard.KeyCode(char='a'):
+                self.input.a = 1 
+            case keyboard.KeyCode(char='d'):
                 self.input.d = 1
-            case 'w':
+            case keyboard.KeyCode(char='w'):
                 self.input.w = 1
-            case 's':
+            case keyboard.KeyCode(char='s'):
                 self.input.s = 1
+            case keyboard.KeyCode(char='i'):
+                self.attack2()
 
     def keyUp(self, key):
         match key:
-            case 'a':
-                self.input.a = 0
-            case 'd':
+            case keyboard.KeyCode(char='a'):
+                self.input.a = 0 
+            case keyboard.KeyCode(char='d'):
                 self.input.d = 0
-            case 'w':
+            case keyboard.KeyCode(char='w'):
                 self.input.w = 0
-            case 's':
+            case keyboard.KeyCode(char='s'):
                 self.input.s = 0
 
     def calcInput(self):
         self.y_input = self.input.d - self.input.a
         self.x_input = self.input.s - self.input.w
-
-    def addAttack2(self):
-        keyboard.on_press_key('i', lambda _: self.attack2())
 
     def attack2(self):
         if self.input.d - self.input.a != 0 or self.input.s - self.input.w != 0:

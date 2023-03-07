@@ -4,7 +4,7 @@ import time
 from components.other.Classes import shutdown, Size, Attack2, Input, Player, Enemy, EnemySpawn
 import logging
 import curses
-import keyboard
+from pynput import keyboard
 from threading import Lock
 
 mutex_x = Lock()
@@ -154,21 +154,26 @@ class Level1:
                 screen.addstr(i, j, self.show_field[self.actual_position_x + i][self.actual_position_y + j], color)
 
     def run(self, screen):
-        keyboard.on_press_key('a', lambda _:self.key_down('a'))
-        keyboard.on_press_key('d', lambda _:self.key_down('d'))
-        keyboard.on_press_key('s', lambda _:self.key_down('s'))
-        keyboard.on_press_key('w', lambda _:self.key_down('w'))
+        
+        # create listeners for the movement keys
+        listener = keyboard.Listener(on_press=self.keyDown, on_release=self.keyUp)
+        listener.start()
+        """    
+        keyboard.on_press('a', lambda _:self.key_down('a'))
+        keyboard.on_press('d', lambda _:self.key_down('d'))
+        keyboard.on_press('s', lambda _:self.key_down('s'))
+        keyboard.on_press('w', lambda _:self.key_down('w'))
 
         keyboard.on_release_key('a', lambda _:self.key_up('a'))
         keyboard.on_release_key('d', lambda _:self.key_up('d'))
         keyboard.on_release_key('s', lambda _:self.key_up('s'))
         keyboard.on_release_key('w', lambda _:self.key_up('w'))
 
-        keyboard.on_press_key('q', lambda _:self.changeScreen())
+        keyboard.on_press('q', lambda _:self.changeScreen())
 
-        keyboard.on_press_key('u', lambda _:self.attack1())
-        keyboard.on_press_key('i', lambda _:self.attack2())
-
+        keyboard.on_press('u', lambda _:self.attack1())
+        keyboard.on_press('i', lambda _:self.attack2())
+        """
         logging.debug("start running")
         self._clear_field(screen)
         self.render(screen)
@@ -215,26 +220,32 @@ class Level1:
         self.field[self.size_x - 1][self.size_y - 1] = '╝'
         logging.debug("Level1: finished generate Field")
 
-    def key_down(self, key):
+    def on_press(self, key):
         match key:
-            case 'a':
+            case keyboard.KeyCode(char='a'):
                 self.input.a = 1 
-            case 'd':
+            case keyboard.KeyCode(char='d'):
                 self.input.d = 1
-            case 'w':
+            case keyboard.KeyCode(char='w'):
                 self.input.w = 1
-            case 's':
+            case keyboard.KeyCode(char='s'):
                 self.input.s = 1
+            case keyboard.KeyCode(char='q'):
+                self.changeScreen()
+            case keyboard.KeyCode(char='u'):
+                self.attack1()
+            case keyboard.KeyCode(char='i'):
+                self.attack2()
 
-    def key_up(self, key):
+    def on_release(self, key):
         match key:
-            case 'a':
+            case keyboard.KeyCode(char='a'):
                 self.input.a = 0 
-            case 'd':
+            case keyboard.KeyCode(char='d'):
                 self.input.d = 0
-            case 'w':
+            case keyboard.KeyCode(char='w'):
                 self.input.w = 0
-            case 's':
+            case keyboard.KeyCode(char='s'):
                 self.input.s = 0
 
     def attack1(self):
@@ -282,6 +293,7 @@ class Level1:
             for j in range(0, y):
                 ret[i][j] = self.show_field[self.actual_position_x + i][self.actual_position_y + j]
         return ret
+
 
 def exit():
     quit()

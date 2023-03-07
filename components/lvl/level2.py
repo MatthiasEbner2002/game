@@ -5,7 +5,7 @@ from components.other.ClassesDefault import Size, EnemySpawn
 from components.other.UI import UI, UI_Info, UI_Logger
 import logging
 import curses
-import keyboard
+from pynput import keyboard
 from threading import Lock
 mutex_x = Lock()
 mutex_y = Lock()
@@ -50,9 +50,9 @@ class Level_Default:
         self.Field01 = self._get01Field(self.blank_field)
         self.field = [[' ' for i in range(self.size_y + 1 if self.size_y + 1 > self.terminal_size.y else self.terminal_size.y)]
                       for j in range(self.size_x + 1 if self.size_x + 1 > self.terminal_size_real_x else self.terminal_size_real_x)]
-        self._addCloseFunction()
-        self._addLoggingFunction()
-        self._addOpenMenuFunction()
+        
+        self.listener = keyboard.Listener(on_press=self._on_press)
+        self.listener.start()
 
     @classmethod
     def from_txt(self, term, screen, player, path):
@@ -200,17 +200,19 @@ class Level_Default:
             self.screen.addstr(self.terminal_size_real_x - 2, len(hpText) + 1, '║', default_color)
             self.screen.addstr(self.terminal_size_real_x - 1, len(hpText) + 1, '╩', default_color)
 
-    def _addCloseFunction(self):
-        keyboard.on_press_key('q', lambda _: self._changeScreen())
-
-    def _addLoggingFunction(self):
-        keyboard.on_press_key('l', lambda _: self._toggleLogs())
 
     def _toggleLogs(self):
         self.showLogs = not self.showLogs
 
-    def _addOpenMenuFunction(self):
-        keyboard.on_press_key('m', lambda _: self._triggerMenu())
+        
+    def _on_press(self, key):
+        match key:
+            case keyboard.KeyCode(char='q'):
+                self._changeScreen()
+            case keyboard.KeyCode(char='l'):
+                self._toggleLogs()
+            case keyboard.KeyCode(char='m'):
+                self._triggerMenu()
 
     def _triggerMenu(self):
         if self.menu_is_closing is not True and self.menu_is_opening is not True:
